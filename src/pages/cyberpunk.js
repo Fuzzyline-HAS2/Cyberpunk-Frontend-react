@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import axios from "axios";
 import Badge from 'react-bootstrap/esm/Badge';
 import Button from 'react-bootstrap/Button';
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 
 import './css/cyberpunk.css'
 import './css/text.css'
 
 import DeviceInfo from './component/device_info';
 import MYDropdownDeviceControl from './component/dropdown_device_control';
+import Timer from './component/timer';
 
 class Cyberpunk extends Component {
     constructor(props) {
@@ -31,7 +30,6 @@ class Cyberpunk extends Component {
             tagmachine_info: []
         };
     }
-    // ESP에서 변경되었을때 OR 리액트에서 버튼눌렀을때 get 하는거로 변경하기!!!!!!
     async componentDidMount() {
         let temple = [];
         let revivalmachine = [];
@@ -169,6 +167,11 @@ class Cyberpunk extends Component {
         }
     }
     render() {
+        /**
+        * @brief iot제외한 장치 전체를 보여주는 함수 (장치별로: 아이템박스,생명장치 등)
+        * @param device 장치이름 (아이템박스, 생명장치 등)
+        * @param device_info 그 장치의 정보 배열
+        */
         function place_check(device, device_info) {
             let bar = [];
             let house = [];
@@ -248,6 +251,11 @@ class Cyberpunk extends Component {
                 </div>
             }
         }
+        /**
+        * @brief iot제외한 장치 전체를 보여주는 함수 (장치별로: 아이템박스,생명장치 등)
+        * @param device 장치이름 (아이템박스, 생명장치 등)
+        * @param device_except_iot iot제외한 장치 부분 전체를 제어하는 버튼을 위한 함수 (장치별로: 아이템박스,생명장치 등)
+        */
         function control(device,device_except_iot) {
             switch (device) {
                 case 'itembox':
@@ -329,11 +337,6 @@ class Cyberpunk extends Component {
                     background-color: light;
                     color: black;
                 }
-                .dropdown.aa {
-                    background-color: black;
-                    padding: 0px 1px;
-                    font-size: 20px;
-                }
                 .btn-SRA {
                 padding: 0px 10px ;
                 font-size: 11px;
@@ -345,7 +348,13 @@ class Cyberpunk extends Component {
                         <h1>Cyberpunk - 장치</h1>
                         <button onClick={this.refresh} style={{ position: 'absolute', top: '40px', left: '450px' }}>새로고침</button>
                     </div>
-                    <div className='controler' style={{ fontSize: '150px' }}>컨트롤러</div>
+                    <div className='controler'>
+                        <div className='controler_wrapper'>
+                            <div className='controler_timer'>
+                                <Timer/>
+                            </div>
+                        </div>
+                    </div>
                     <div className='device'>
                         <div className='device_wrapper'>
                             <div className='device_control'>

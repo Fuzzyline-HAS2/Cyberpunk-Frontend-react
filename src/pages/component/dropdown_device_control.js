@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
-
+import axios from 'axios';
+/**
+* @brief 각각의 장치를 제어하는 드롭다운 컴포넌트 
+*/
 const MYDropdownDeviceControl = (props) => {
+    const [device_name,setDevice_name]=useState();
+    const [command,setCommand]=useState();
     const select_device = {
         itembox :  [
             { value: "장치명", name: "장치명" },
@@ -70,70 +75,84 @@ const MYDropdownDeviceControl = (props) => {
     const select_command = {
         itembox : [
             { value: "명령어", name: "명령어" },
-            { value: "S", name: "S(게임상태)" },
-            { value: "R", name: "R(게임상태)" },
-            { value: "A", name: "A(게임상태)" },
-            { value: "open", name: "상자열기(장치상태)" },
-            { value: "close", name: "상자닫기(장치상태)" }
+            { value: "game_state_S", name: "S(게임상태)" },
+            { value: "game_state_R", name: "R(게임상태)" },
+            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "device_state_open", name: "상자열기(장치상태)" },
+            { value: "device_state_close", name: "상자닫기(장치상태)" }
         ],
         revivalmachine : [
             { value: "명령어", name: "명령어" },
-            { value: "S", name: "S(게임상태)" },
-            { value: "R", name: "R(게임상태)" },
-            { value: "A", name: "A(게임상태)" },
-            { value: "self_revive", name: "자가부활(장치상태)" },
-            { value: "use_complit", name: "사용완료(장치상태)" }
+            { value: "game_state_S", name: "S(게임상태)" },
+            { value: "game_state_R", name: "R(게임상태)" },
+            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "device_state_self_revive", name: "자가부활(장치상태)" },
+            { value: "device_state_use_complit", name: "사용완료(장치상태)" }
         ],
         tagmachine : [
             { value: "명령어", name: "명령어" },
-            { value: "S", name: "S(게임상태)" },
-            { value: "R", name: "R(게임상태)" },
-            { value: "A", name: "A(게임상태)" },
-            { value: "open", name: "도어오픈" },
-            { value: "lock", name: "도어잠금" },
+            { value: "game_state_S", name: "S(게임상태)" },
+            { value: "game_state_R", name: "R(게임상태)" },
+            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "device_state_open", name: "도어오픈" },
+            { value: "device_state_lock", name: "도어잠금" },
         ],
         duct : [
             { value: "명령어", name: "명령어" },
-            { value: "S", name: "S(게임상태)" },
-            { value: "R", name: "R(게임상태)" },
-            { value: "A", name: "A(게임상태)" },
+            { value: "game_state_S", name: "S(게임상태)" },
+            { value: "game_state_R", name: "R(게임상태)" },
+            { value: "game_state_A", name: "A(게임상태)" },
         ],
         generator : [
             { value: "명령어", name: "명령어" },
-            { value: "S", name: "S(게임상태)" },
-            { value: "R", name: "R(게임상태)" },
-            { value: "A", name: "A(게임상태)" },
-            { value: "battery_max", name: "배터리공급완료" },
-            { value: "repair_completed", name: "수리완료" },
+            { value: "game_state_S", name: "S(게임상태)" },
+            { value: "game_state_R", name: "R(게임상태)" },
+            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "device_state_battery_max", name: "배터리공급완료" },
+            { value: "device_state_repair_completed", name: "수리완료" },
             
         ],
         escapemachine : [
             { value: "명령어", name: "명령어" },
-            { value: "S", name: "S(게임상태)" },
-            { value: "R", name: "R(게임상태)" },
-            { value: "A", name: "A(게임상태)" },
-            { value: "escape_activate", name: "탈출장치활성화" },
-            { value: "escape_completed", name: "탈출완료" },
+            { value: "game_state_S", name: "S(게임상태)" },
+            { value: "game_state_R", name: "R(게임상태)" },
+            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "device_state_escape_activate", name: "탈출장치활성화" },
+            { value: "device_state_escape_completed", name: "탈출완료" },
         ],
         temple : [
             { value: "명령어", name: "명령어" },
-            { value: "S", name: "S(게임상태)" },
-            { value: "R", name: "R(게임상태)" },
-            { value: "A", name: "A(게임상태)" },
-            { value: "takenchip+1", name: "생명칩+1" },
-            { value: "takenchip_max", name: "술래승리" },
+            { value: "game_state_S", name: "S(게임상태)" },
+            { value: "game_state_R", name: "R(게임상태)" },
+            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "device_state_takenchip+1", name: "생명칩+1" },
+            { value: "device_state_takenchip_max", name: "술래승리" },
         ],
     }
 
     const device_change = (e) => {
+        setDevice_name(e.target.value);
         console.log(e.target.value)
     }
     const command_change = (e) => {
+        setCommand(e.target.value);
         console.log(e.target.value)
     }
 
-        function dropdown_make(device,command,device_list,command_list){
-            if((device_list[device] && command_list[device])!== undefined){
+    async function send_device_command(device){
+        await axios.post('/api/update/dropdown', {
+            theme: 'cyberpunk',
+            device: device,
+            device_name: device_name,
+            command: command
+        })
+            .catch(function (error) {
+                console.log(error);
+            });
+    }
+
+    function dropdown_make(device,command,device_list,command_list){
+        if((device_list[device] && command_list[device])!== undefined){
             let my_device_list = device_list[device];
             let my_command_list = command_list[device];
             switch (command){
@@ -153,13 +172,13 @@ const MYDropdownDeviceControl = (props) => {
                                         </option>
                                     )}
                                 </select>
-                                <button style={{border:'none'}}>제출</button>
+                                <button style={{border:'none'}} onClick = {() => {send_device_command(device)}}>제출</button>
                             </div> 
                 default :
                     break;
             }
+        }
     }
-}
     return(
         <div>
             {dropdown_make(props.device,props.command,select_device,select_command)}

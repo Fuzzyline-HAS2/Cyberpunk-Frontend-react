@@ -2,6 +2,8 @@
     font-size: 15px;
     font-family:"Pretendard-SemiBold";
 }
-.dropdown-button.select{
-    font-size: 50px;
+.timer_number_font{
+    font-size: 75px;
+    margin : 0px 0px 0px 20px;
+    font-family: "Pretendard-SemiBold";
 }

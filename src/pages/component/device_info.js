@@ -4,10 +4,13 @@ import Badge from 'react-bootstrap/Badge';
 
 /**
 * @brief 장치 정보를 보여주는 컴포넌트 
-* @param props place 디바이스의 위치 -> 장소 알 수 있음. css 그리드 지정.   
-* @param props place_info 디바이스의 정보 -> 화면에 info 띄워주기
 */
 const DeviceInfo = (props) => {
+    /**
+    * @brief 장치 정보를 보여주는 함수
+    * @param props place 디바이스의 위치 -> 장소 알 수 있음. css 그리드 지정.   
+    * @param props place_info 디바이스의 정보 -> 화면에 info 띄워주기
+    */
     function show_device(place,place_info){
         if(place !== undefined && place_info !== undefined){
             let game_color;
@@ -120,7 +123,20 @@ const DeviceInfo = (props) => {
 
     return (
             <>
-            
+                <style type="text/css">
+                    {`
+                .bg-on {
+                    background-color: light;
+                    color: black;
+                    outline : solid 4px rgb(0, 255, 0);
+                }
+                .bg-off {
+                    background-color: light;
+                    color: black;
+                    outline : solid 4px rgb(255, 0, 0);
+                }
+                `}
+                </style>
             {/* 황무지에서 한방에 덕트가 3개있는 경우도 있음. -> unedfined가 아닐때만 출력함. */}
                 
 
