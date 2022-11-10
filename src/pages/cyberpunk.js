@@ -8,7 +8,7 @@ import './css/text.css'
 
 import DeviceInfo from './component/device_info';
 import MYDropdownDeviceControl from './component/dropdown_device_control';
-import Timer from './component/timer';
+import Control from './component/control';
 
 class Cyberpunk extends Component {
     constructor(props) {
@@ -350,9 +350,7 @@ class Cyberpunk extends Component {
                     </div>
                     <div className='controler'>
                         <div className='controler_wrapper'>
-                            <div className='controler_timer'>
-                                <Timer/>
-                            </div>
+                            <Control/>
                         </div>
                     </div>
                     <div className='device'>
