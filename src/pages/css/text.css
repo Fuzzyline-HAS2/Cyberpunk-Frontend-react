@@ -7,3 +7,15 @@
     margin : 0px 0px 0px 20px;
     font-family: "Pretendard-SemiBold";
 }
+.revival_font_name{
+    font-size: 12px;
+    margin : 0px 0px 0px 0px;
+    font-family: "Pretendard-ExtraBold";
+    text-align: center;
+}
+.revival_font{
+    font-size: 11px;
+    margin : 0px 0px 0px 0px;
+    font-family: "Pretendard-SemiBold";
+    text-align: center;
+}

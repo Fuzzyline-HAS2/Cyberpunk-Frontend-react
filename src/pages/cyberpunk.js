@@ -9,6 +9,7 @@ import './css/text.css'
 import DeviceInfo from './component/device_info';
 import MYDropdownDeviceControl from './component/dropdown_device_control';
 import Control from './component/control';
+import NarrationCalculate from './component/narration_calculate';
 
 class Cyberpunk extends Component {
     constructor(props) {
@@ -140,8 +141,8 @@ class Cyberpunk extends Component {
         }
     }
     /**
-    * @brief iot제외한 장치 부분 전체를 제어하는 버튼을 위한 함수 (장치별로: 아이템박스,생명장치 등)
-    * @param device 장치이름 (아이템박스, 생명장치 등)
+    * @brief iot제외한 장치 부분 전체를 제어하는 버튼을 위한 함수 (장치별로: 아이템박스,부활장치 등)
+    * @param device 장치이름 (아이템박스, 부활장치 등)
     * @param purpose 버튼을 누르는 목적 reset,S,R,A 등
     */
     async device_except_iot(device,purpose) {
@@ -168,8 +169,8 @@ class Cyberpunk extends Component {
     }
     render() {
         /**
-        * @brief iot제외한 장치 전체를 보여주는 함수 (장치별로: 아이템박스,생명장치 등)
-        * @param device 장치이름 (아이템박스, 생명장치 등)
+        * @brief iot제외한 장치 전체를 보여주는 함수 (장치별로: 아이템박스,부활장치 등)
+        * @param device 장치이름 (아이템박스, 부활장치 등)
         * @param device_info 그 장치의 정보 배열
         */
         function place_check(device, device_info) {
@@ -252,9 +253,9 @@ class Cyberpunk extends Component {
             }
         }
         /**
-        * @brief iot제외한 장치 전체를 보여주는 함수 (장치별로: 아이템박스,생명장치 등)
-        * @param device 장치이름 (아이템박스, 생명장치 등)
-        * @param device_except_iot iot제외한 장치 부분 전체를 제어하는 버튼을 위한 함수 (장치별로: 아이템박스,생명장치 등)
+        * @brief iot제외한 장치 전체를 보여주는 함수 (장치별로: 아이템박스,부활장치 등)
+        * @param device 장치이름 (아이템박스, 부활장치 등)
+        * @param device_except_iot iot제외한 장치 부분 전체를 제어하는 버튼을 위한 함수 (장치별로: 아이템박스,부활장치 등)
         */
         function control(device,device_except_iot) {
             switch (device) {
@@ -269,7 +270,7 @@ class Cyberpunk extends Component {
                     </Badge>
                 case 'revivalmachine':
                     return <Badge bg="bdg">
-                        <span>생명장치[{device}]</span><br />
+                        <span>부활장치[{device}]</span><br />
                         <Button variant="danger" size='reset' onClick={() => { device_except_iot('revivalmachine', 'reset') }}>revival reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('revivalmachine', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('revivalmachine', 'R') }}>R</Button>
@@ -327,6 +328,9 @@ class Cyberpunk extends Component {
         }
         return (
             <>
+            {console.log(this.state.itembox_info)}
+                <NarrationCalculate itembox_info = {this.state.itembox_info}/>
+                //  revivalmachine_info = {this.revivalmachine_info} tagmachine_info = {this.tagmachine_info} duct_info = {this.duct_info} generator_info = {this.generator_info} escapemachine_info = {this.escapemachine_info} temple_info = {this.temple_info}/>
                 <style type="text/css">
                     {`
                 .btn-reset {

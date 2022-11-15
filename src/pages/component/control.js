@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import Narration from'./narration.js';
 
 let time_control = null;
 /**
@@ -12,6 +13,9 @@ const Control = () => {
     const [timer,setTimer]=useState(2101);
     const [game_start_show, setGameStartShow] = useState(false);
     const [timer_reset_show, setTimerResetShow] = useState(false);
+    const revival = ['BR1','BR2','HR1','HR2','GR1','GR2','OR1','OR2','FR1','FR2'];
+    const [revival_order,setRevivalOrder] = useState([]);
+    let revival_list = [];
 
     const game_startClose = () => setGameStartShow(false);
     const game_startShow = () => setGameStartShow(true);
@@ -34,7 +38,7 @@ const Control = () => {
     * @param timer_name 타이머 종류
     * @param command 타이머 제어 명령어 
     */
-    async function timer_control(timer_name,command){
+    const timer_control = async(timer_name,command) => {
         if(command === "start"){
             if(time_control === null){
                 time_control = setInterval(time_control_func, 1000);
@@ -86,7 +90,7 @@ const Control = () => {
     /**
     * @brief game start 버튼을 누르면 카운트다운 시작하는 함수 1초마다 반복됨
     */
-    async function game_start(){
+    const game_start = async() => {
         let time = await axios.post('/api/timer', {
             theme: 'cyberpunk',
             timer_name: 'playtime',
@@ -105,7 +109,7 @@ const Control = () => {
     * @brief iot제외 모든장치 목적에따라 상태 변경해주는 함수 
     * @param purpose 버튼을 누르는 목적 S,R
     */
-    async function button_all_device(purpose){
+    const button_all_device = async(purpose) => {
         if(purpose === 'check'){
             await axios.post('/api/check', {
                 theme: 'cyberpunk',
@@ -125,6 +129,17 @@ const Control = () => {
             .catch(function (error) {
                 console.log(error);
             });
+            if(purpose === 'R'){
+                revival_list = []
+                while(revival_list.length < 10){
+                    let num = Math.floor(Math.random()*10)
+                    if(!revival_list.includes(revival[num])){
+                        revival_list.push(revival[num]);
+                    }
+                }
+                setRevivalOrder(revival_list)
+                console.log(revival_order)
+            }
         }
     }
     /**
@@ -144,12 +159,7 @@ const Control = () => {
             return <p className='timer_number_font'>{parseInt(timer/60)}:{timer%60}</p>
         }
     }
-    /**
-    * @brief timer를 계산해서 출력해주는 함수 
-    */
-    // function narration_time(time){ 
-        
-    // }
+    
 
     return(
         <>
@@ -208,7 +218,7 @@ const Control = () => {
                     <Modal.Header closeButton>
                         <Modal.Title>GAME START 버튼 입력 감지</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>게임을 시작하시겠습니까?</Modal.Body>
+                    <Modal.Body>게임을 시작하시겠습니까? OS 리셋버튼을 눌러주세요.</Modal.Body>
                     <Modal.Footer>
                         <Button variant="secondary" onClick={game_startClose}>
                             취소
@@ -219,7 +229,18 @@ const Control = () => {
                     </Modal.Footer>
                 </Modal>
             </div>
-            {/* {narration_time(timer)} */}
+            <div className='revival_order'>
+                <p className='revival_font_name'>생명장치</p>
+                <p className='revival_font'>32:00 - {revival_order[0]} {revival_order[1]} {revival_order[2]}</p>
+                <p className='revival_font'>29:00 - {revival_order[3]}</p>
+                <p className='revival_font'>26:00 - {revival_order[4]}</p>
+                <p className='revival_font'>23:00 - {revival_order[5]}</p>
+                <p className='revival_font'>20:00 - {revival_order[6]}</p>
+                <p className='revival_font'>17:00 - {revival_order[7]}</p>
+                <p className='revival_font'>14:00 - {revival_order[8]}</p>
+                <p className='revival_font'>11:00 - {revival_order[9]}</p>
+            </div>
+            <Narration time = {timer} revival_order = {revival_order}/>
         </>
     )
 };
