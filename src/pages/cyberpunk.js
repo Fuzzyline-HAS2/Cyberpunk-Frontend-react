@@ -261,7 +261,7 @@ class Cyberpunk extends Component {
                 case 'itembox':
                     return <Badge bg="bdg">
                         <span>아이템박스[{device}]</span><br />
-                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('itembox', 'reset') }}>item reset</Button>
+                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('itembox', 'reset') }}>device reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('itembox', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('itembox', 'R') }}>R</Button>
                         <Button variant="warning" size='SRA' onClick={() => { device_except_iot('itembox', 'A') }}>A</Button><br />
@@ -270,7 +270,7 @@ class Cyberpunk extends Component {
                 case 'revivalmachine':
                     return <Badge bg="bdg">
                         <span>부활장치[{device}]</span><br />
-                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('revivalmachine', 'reset') }}>revival reset</Button>
+                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('revivalmachine', 'reset') }}>device reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('revivalmachine', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('revivalmachine', 'R') }}>R</Button>
                         <Button variant="warning" size='SRA' onClick={() => { device_except_iot('revivalmachine', 'A') }}>A</Button><br />
@@ -279,7 +279,7 @@ class Cyberpunk extends Component {
                 case 'tagmachine':
                     return <Badge bg="bdg">
                         <span>태그머신[{device}]</span><br />
-                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('tagmachine', 'reset') }}>revival reset</Button>
+                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('tagmachine', 'reset') }}>device reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('tagmachine', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('tagmachine', 'R') }}>R</Button>
                         <Button variant="warning" size='SRA' onClick={() => { device_except_iot('tagmachine', 'A') }}>A</Button><br />
@@ -288,7 +288,7 @@ class Cyberpunk extends Component {
                 case 'duct':
                     return <Badge bg="bdg">
                         <span>덕트[{device}]</span><br />
-                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('duct', 'reset') }}>revival reset</Button>
+                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('duct', 'reset') }}>device reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('duct', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('duct', 'R') }}>R</Button>
                         <Button variant="warning" size='SRA' onClick={() => { device_except_iot('duct', 'A') }}>A</Button><br />
@@ -297,7 +297,7 @@ class Cyberpunk extends Component {
                 case 'generator':
                     return <Badge bg="bdg">
                         <span>발전기[{device}]</span><br />
-                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('generator', 'reset') }}>revival reset</Button>
+                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('generator', 'reset') }}>device reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('generator', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('generator', 'R') }}>R</Button>
                         <Button variant="warning" size='SRA' onClick={() => { device_except_iot('generator', 'A') }}>A</Button><br />
@@ -306,7 +306,7 @@ class Cyberpunk extends Component {
                 case 'escapemachine':
                     return <Badge bg="bdg">
                         <span>탈출장치[{device}]</span><br />
-                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('escapemachine', 'reset') }}>revival reset</Button>
+                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('escapemachine', 'reset') }}>device reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('escapemachine', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('escapemachine', 'R') }}>R</Button>
                         <Button variant="warning" size='SRA' onClick={() => { device_except_iot('escapemachine', 'A') }}>A</Button><br />
@@ -315,7 +315,7 @@ class Cyberpunk extends Component {
                 case 'temple':
                     return <Badge bg="bdg">
                         <span>제단[{device}]</span><br />
-                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('temple', 'reset') }}>revival reset</Button>
+                        <Button variant="danger" size='reset' onClick={() => { device_except_iot('temple', 'reset') }}>device reset</Button>
                         <Button variant="light" size='SRA' onClick={() => { device_except_iot('temple', 'S') }}>S</Button>
                         <Button variant="danger" size='SRA' onClick={() => { device_except_iot('temple', 'R') }}>R</Button>
                         <Button variant="warning" size='SRA' onClick={() => { device_except_iot('temple', 'A') }}>A</Button><br />
