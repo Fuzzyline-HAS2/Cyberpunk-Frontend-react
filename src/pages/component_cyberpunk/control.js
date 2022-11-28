@@ -7,9 +7,9 @@ import Narration from'./narration.js';
 
 let time_control = null;
 /**
-* @brief 장치 정보를 보여주는 컴포넌트 
+* @brief 게임 진행을 조작하는 컴포넌트 
 */
-const Control = () => {
+const Control = (props) => {
     const [timer,setTimer]=useState(2101);
     const [game_start_show, setGameStartShow] = useState(false);
     const [timer_reset_show, setTimerResetShow] = useState(false);
@@ -129,7 +129,7 @@ const Control = () => {
             .catch(function (error) {
                 console.log(error);
             });
-            if(purpose === 'R'){
+            if(purpose === 'R'){ //생명장치 활성화 순서 
                 revival_list = []
                 while(revival_list.length < 10){
                     let num = Math.floor(Math.random()*10)
@@ -139,6 +139,15 @@ const Control = () => {
                 }
                 setRevivalOrder(revival_list)
                 console.log(revival_order)
+            }
+            else if(purpose === 'S'){
+                await axios.post('/api/reset', {
+                    theme: 'cyberpunk',
+                    device: 'all_except_iot',
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
             }
         }
     }
@@ -240,7 +249,7 @@ const Control = () => {
                 <p className='revival_font'>14:00 - {revival_order[8]}</p>
                 <p className='revival_font'>11:00 - {revival_order[9]}</p>
             </div>
-            <Narration time = {timer} revival_order = {revival_order}/>
+            <Narration time = {timer} revival_order = {revival_order} device_info = {props} timer_control = {timer_control}/>
         </>
     )
 };

@@ -41,6 +41,30 @@ const DeviceInfo = (props) => {
                         case 'activate':
                             device_color = 'warning'
                             break;
+                        case 'open':
+                            device_color = 'open'
+                            break;
+                        case 'used':
+                            device_color = 'used'
+                            break;
+                        case 'self_revive':
+                            device_color = 'self_revive'
+                            break;
+                        case 'lock':
+                            device_color = 'lock'
+                            break;
+                        case 'battery_max':
+                            device_color = 'battery_max'
+                            break;
+                        case 'repaired':
+                            device_color = 'repaired'
+                            break;
+                        case 'escape':
+                            device_color = 'escape'
+                            break;
+                        case 'takenchip_max':
+                            device_color = 'takenchip_max'
+                            break;
                         default :
                             break;
                     }
@@ -71,50 +95,50 @@ const DeviceInfo = (props) => {
             switch (place.device_type){
                 case "itembox":
                     return  <Badge bg="light" text="dark">
-                                <Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge><Badge bg={online_color} text="dark">{online_state}</Badge>
+                                <Badge bg={online_color} text="dark">{online_state}</Badge><Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge>
                                 <Badge bg={game_color} text="dark">{place_info.game_state}</Badge><br></br>
-                                <Badge bg="light" text="dark">장치 상태 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
+                                <Badge bg="light" text="dark">장치 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
                                 <span>🔋</span><Badge bg="light" text="dark">{place_info.battery_pack}</Badge><span>🌟</span><Badge bg="light" text="dark">{place_info.exp_pack}</Badge>
                             </Badge>
                 case "revivalmachine":
                     return  <Badge bg="light" text="dark">
-                                <Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge><Badge bg={online_color} text="dark">{online_state}</Badge>
+                                <Badge bg={online_color} text="dark">{online_state}</Badge><Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge>
                                 <Badge bg={game_color} text="dark">{place_info.game_state}</Badge><br></br>
-                                <Badge bg="light" text="dark">장치 상태 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
+                                <Badge bg="light" text="dark">장치 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
                                 <span>💟</span><Badge bg="light" text="dark">{place_info.life_chip}</Badge>
                             </Badge>
                 case "tagmachine":
                     return  <Badge bg="light" text="dark">
-                                <Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge><Badge bg={online_color} text="dark">{online_state}</Badge>
+                                <Badge bg={online_color} text="dark">{online_state}</Badge><Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge>
                                 <Badge bg={game_color} text="dark">{place_info.game_state}</Badge><br></br>
-                                <Badge bg="light" text="dark">장치 상태 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
+                                <Badge bg="light" text="dark">장치 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
                             </Badge>
                 case "duct":
                     return  <Badge bg="light" text="dark">
-                                <Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge><Badge bg={online_color} text="dark">{online_state}</Badge>
+                                <Badge bg={online_color} text="dark">{online_state}</Badge><Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge>
                                 <Badge bg={game_color} text="dark">{place_info.game_state}</Badge><br></br>
-                                <Badge bg="light" text="dark">장치 상태 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
+                                <Badge bg="light" text="dark">장치 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
                                 <span>🧊쿨타임</span><Badge bg="light" text="dark">{place_info.cool_time}</Badge>
                             </Badge>
                 case "generator":
                     return  <Badge bg="light" text="dark">
-                                <Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge><Badge bg={online_color} text="dark">{online_state}</Badge>
+                                <Badge bg={online_color} text="dark">{online_state}</Badge><Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge>
                                 <Badge bg={game_color} text="dark">{place_info.game_state}</Badge><br></br>
-                                <Badge bg="light" text="dark">장치 상태 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
+                                <Badge bg="light" text="dark">장치 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
                                 <span>🔋</span><Badge bg="light" text="dark">{place_info.battery_pack}/{place_info.max_battery_pack}</Badge>
                             </Badge>
                 case "escapemachine":
                     return  <Badge bg="light" text="dark">
-                                <Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge><Badge bg={online_color} text="dark">{online_state}</Badge>
+                                <Badge bg={online_color} text="dark">{online_state}</Badge><Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge>
                                 <Badge bg={game_color} text="dark">{place_info.game_state}</Badge><br></br>
-                                <Badge bg="light" text="dark">장치 상태 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
+                                <Badge bg="light" text="dark">장치 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
                                 <span>👻</span><Badge bg="light" text="dark">{place_info.max_ghost_tag}</Badge>
                             </Badge>
                 case "temple":
                     return  <Badge bg="light" text="dark">
-                                <Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge><Badge bg={online_color} text="dark">{online_state}</Badge>
+                                <Badge bg={online_color} text="dark">{online_state}</Badge><Badge bg={device_name_color} text="dark"><div className='device_name'>{place.device_name}</div></Badge>
                                 <Badge bg={game_color} text="dark">{place_info.game_state}</Badge><br></br>
-                                <Badge bg="light" text="dark">장치 상태 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
+                                <Badge bg="light" text="dark">장치 :</Badge><Badge bg={device_color} text="dark">{place_info.device_state}</Badge><br></br>
                                 <span>🚔</span><Badge bg="light" text="dark">{place_info.taken_chip}</Badge>
                             </Badge>    
             }
@@ -134,6 +158,38 @@ const DeviceInfo = (props) => {
                     background-color: light;
                     color: black;
                     outline : solid 4px rgb(255, 0, 0);
+                }
+                .bg-open {
+                    background-color: rgba(75, 204, 255, 0.7);
+                    color: black;
+                }
+                .bg-used {
+                    background-color: rgba(75, 117, 255, 0.7);
+                    color: black;
+                }
+                .bg-self_revive {
+                    background-color: rgba(171, 255, 75, 0.7);
+                    color: black;
+                }
+                .bg-lock {
+                    background-color: rgba(90, 255, 75, 0.7);
+                    color: black;
+                }
+                .bg-battery_max {
+                    background-color: rgba(90, 255, 75, 0.7);
+                    color: black;
+                }
+                .bg-repaired {
+                    background-color: rgba(75, 102, 255, 0.7);
+                    color: black;
+                }
+                .bg-escape {
+                    background-color: rgba(90, 255, 75, 0.7);
+                    color: black;
+                }
+                .bg-takenchip_max {
+                    background-color: rgba(183, 75, 255, 0.7);
+                    color: black;
                 }
                 `}
                 </style>

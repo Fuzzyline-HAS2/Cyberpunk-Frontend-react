@@ -17,6 +17,7 @@
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
+
 .controler_wrapper {
     display: grid;
     grid-template-columns: repeat(10, 1fr);; /*repeat(2, 1fr); 1fr 4fr 6fr 6fr 6fr 6fr 6fr 4fr 1fr*/
@@ -30,14 +31,20 @@
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
-.controler_game_start {
+.controler_revival_order {
     grid-column: 3/4;
     grid-row: 1;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
-.controler_revival_order {
+.controler_game_start {
     grid-column: 4/5;
+    grid-row: 1;
+    outline : solid 1px rgb(97, 97, 97);
+    background-color: rgba(255, 255, 255, 0.7); 
+}
+.controler_game_progress {
+    grid-column: 6/7;
     grid-row: 1;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 

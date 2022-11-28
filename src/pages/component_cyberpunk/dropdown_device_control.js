@@ -9,6 +9,7 @@ const MYDropdownDeviceControl = (props) => {
     const select_device = {
         itembox :  [
             { value: "장치명", name: "장치명" },
+            { value: "ALL", name: "ALL" },
             { value: "BI1", name: "BI1" },
             { value: "BI2", name: "BI2" },
             { value: "HI1", name: "HI1" },
@@ -22,6 +23,7 @@ const MYDropdownDeviceControl = (props) => {
         ],
         revivalmachine : [
             { value: "장치명", name: "장치명" },
+            { value: "ALL", name: "ALL" },
             { value: "BR1", name: "BR1" },
             { value: "BR2", name: "BR2" },
             { value: "HR1", name: "HR1" },
@@ -35,6 +37,7 @@ const MYDropdownDeviceControl = (props) => {
         ],
         tagmachine : [
             { value: "장치명", name: "장치명" },
+            { value: "ALL", name: "ALL" },
             { value: "BD", name: "BD" },
             { value: "HD1", name: "HD1" },
             { value: "HD2", name: "HD2" },
@@ -44,6 +47,7 @@ const MYDropdownDeviceControl = (props) => {
         ],
         duct : [
             { value: "장치명", name: "장치명" },
+            { value: "ALL", name: "ALL" },
             { value: "BV1", name: "BV1" },
             { value: "BV2", name: "BV2" },
             { value: "HV1", name: "HV1" },
@@ -54,6 +58,7 @@ const MYDropdownDeviceControl = (props) => {
         ],
         generator : [
             { value: "장치명", name: "장치명" },
+            { value: "ALL", name: "ALL" },
             { value: "BG", name: "BG" },
             { value: "HG", name: "HG" },
             { value: "GG", name: "GG" },
@@ -62,6 +67,7 @@ const MYDropdownDeviceControl = (props) => {
         ],
         escapemachine : [
             { value: "장치명", name: "장치명" },
+            { value: "ALL", name: "ALL" },
             { value: "BE", name: "BE" },
             { value: "OE", name: "OE" },
             { value: "FE", name: "FE" },
@@ -75,58 +81,66 @@ const MYDropdownDeviceControl = (props) => {
     const select_command = {
         itembox : [
             { value: "명령어", name: "명령어" },
-            { value: "game_state_S", name: "S(게임상태)" },
-            { value: "game_state_R", name: "R(게임상태)" },
-            { value: "game_state_A", name: "A(게임상태)" },
-            { value: "device_state_open", name: "상자열기(장치상태)" },
-            { value: "device_state_close", name: "상자닫기(장치상태)" }
+            { value: "game_state_S", name: "세팅(S)" },
+            { value: "game_state_R", name: "준비(R)" },
+            { value: "game_state_A", name: "활성화(A)" },
+            { value: "device_state_check", name: "장치 확인(check)" },
+            { value: "device_state_open", name: "상자열기(open)" },
+            { value: "device_state_used", name: "상자 사용 완료(used)" }
         ],
         revivalmachine : [
             { value: "명령어", name: "명령어" },
-            { value: "game_state_S", name: "S(게임상태)" },
-            { value: "game_state_R", name: "R(게임상태)" },
-            { value: "game_state_A", name: "A(게임상태)" },
-            { value: "device_state_self_revive", name: "자가부활(장치상태)" },
-            { value: "device_state_use_complit", name: "사용완료(장치상태)" }
+            { value: "game_state_S", name: "세팅(S)" },
+            { value: "game_state_R", name: "준비(R)" },
+            { value: "game_state_A", name: "활성화(A)" },
+            { value: "device_state_check", name: "장치 확인(check)" },
+            { value: "device_state_self_revive", name: "자가부활(self_revive)" },
+            { value: "device_state_used", name: "사용완료(used)" }
         ],
         tagmachine : [
             { value: "명령어", name: "명령어" },
-            { value: "game_state_S", name: "S(게임상태)" },
-            { value: "game_state_R", name: "R(게임상태)" },
-            { value: "game_state_A", name: "A(게임상태)" },
-            { value: "device_state_open", name: "도어오픈" },
-            { value: "device_state_lock", name: "도어잠금" },
+            { value: "game_state_S", name: "세팅(S)" },
+            { value: "game_state_R", name: "준비(R)" },
+            { value: "game_state_A", name: "활성화(A)" },
+            { value: "device_state_check", name: "장치 확인(check)" },
+            { value: "device_state_open", name: "도어오픈(open)" },
+            { value: "device_state_lock", name: "도어잠금(lock)" },
         ],
         duct : [
             { value: "명령어", name: "명령어" },
-            { value: "game_state_S", name: "S(게임상태)" },
-            { value: "game_state_R", name: "R(게임상태)" },
-            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "game_state_S", name: "세팅(S)" },
+            { value: "game_state_R", name: "준비(R)" },
+            { value: "game_state_A", name: "활성화(A)" },
+            { value: "device_state_check", name: "장치 확인(check)" },
         ],
         generator : [
             { value: "명령어", name: "명령어" },
-            { value: "game_state_S", name: "S(게임상태)" },
-            { value: "game_state_R", name: "R(게임상태)" },
-            { value: "game_state_A", name: "A(게임상태)" },
-            { value: "device_state_battery_max", name: "배터리공급완료" },
-            { value: "device_state_repair_completed", name: "수리완료" },
+            { value: "game_state_S", name: "세팅(S)" },
+            { value: "game_state_R", name: "준비(R)" },
+            { value: "game_state_A", name: "활성화(A)" },
+            { value: "device_state_check", name: "장치 확인(check)" },
+            { value: "device_state_battery_max", name: "배터리공급완료(battery_max)" },
+            { value: "device_state_repaired", name: "수리완료(repaired)" },
+            { value: "device_state_repaired_all", name: "전체수리완료(repaired_all)" },
             
         ],
         escapemachine : [
             { value: "명령어", name: "명령어" },
-            { value: "game_state_S", name: "S(게임상태)" },
-            { value: "game_state_R", name: "R(게임상태)" },
-            { value: "game_state_A", name: "A(게임상태)" },
-            { value: "device_state_escape_activate", name: "탈출장치활성화" },
-            { value: "device_state_escape_completed", name: "탈출완료" },
+            { value: "game_state_S", name: "세팅(S)" },
+            { value: "game_state_R", name: "준비(R)" },
+            { value: "game_state_A", name: "활성화(A)" },
+            { value: "device_state_check", name: "장치 확인(check)" },
+            { value: "device_state_escape", name: "탈출완료(escape)" },
         ],
         temple : [
             { value: "명령어", name: "명령어" },
-            { value: "game_state_S", name: "S(게임상태)" },
-            { value: "game_state_R", name: "R(게임상태)" },
-            { value: "game_state_A", name: "A(게임상태)" },
+            { value: "game_state_S", name: "세팅(S)" },
+            { value: "game_state_R", name: "준비(R)" },
+            { value: "game_state_A", name: "활성화(A)" },
+            { value: "device_state_check", name: "장치 확인(check)" },
             { value: "device_state_takenchip+1", name: "생명칩+1" },
-            { value: "device_state_takenchip_max", name: "술래승리" },
+            { value: "device_state_takenchip-1", name: "생명칩-1" },
+            { value: "device_state_takenchip_max", name: "술래승리(takenchip_max)" },
         ],
     }
 
@@ -142,7 +156,7 @@ const MYDropdownDeviceControl = (props) => {
     async function send_device_command(device){
         await axios.post('/api/update/dropdown', {
             theme: 'cyberpunk',
-            device: device,
+            device_type: device,
             device_name: device_name,
             command: command
         })

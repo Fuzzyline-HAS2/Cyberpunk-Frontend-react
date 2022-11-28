@@ -6,10 +6,9 @@ import Button from 'react-bootstrap/Button';
 import './css/cyberpunk.css'
 import './css/text.css'
 
-import DeviceInfo from './component/device_info';
-import MYDropdownDeviceControl from './component/dropdown_device_control';
-import Control from './component/control';
-import NarrationCalculate from './component/narration_calculate';
+import DeviceInfo from './component_cyberpunk/device_info';
+import MYDropdownDeviceControl from './component_cyberpunk/dropdown_device_control';
+import Control from './component_cyberpunk/control';
 
 class Cyberpunk extends Component {
     constructor(props) {
@@ -43,7 +42,7 @@ class Cyberpunk extends Component {
             let data = await axios.get('/api/DB_cyberpunk');
             if (data.data.length !== 0) {
                 data = data.data
-                console.log(data)
+                // console.log(data)
                 data.device.map(function (x) {
                     switch (x.device_type) {
                         case "temple":
@@ -327,10 +326,7 @@ class Cyberpunk extends Component {
 
         }
         return (
-            <>
-            {console.log(this.state.itembox_info)}
-                <NarrationCalculate itembox_info = {this.state.itembox_info}/>
-                //  revivalmachine_info = {this.revivalmachine_info} tagmachine_info = {this.tagmachine_info} duct_info = {this.duct_info} generator_info = {this.generator_info} escapemachine_info = {this.escapemachine_info} temple_info = {this.temple_info}/>
+            <>  
                 <style type="text/css">
                     {`
                 .btn-reset {
@@ -349,12 +345,12 @@ class Cyberpunk extends Component {
                 </style>
                 <div className='wrapper'>
                     <div className='header'>
-                        <h1>Cyberpunk - 장치</h1>
+                        <h1>Cyberpunk</h1>
                         <button onClick={this.refresh} style={{ position: 'absolute', top: '40px', left: '450px' }}>새로고침</button>
                     </div>
                     <div className='controler'>
                         <div className='controler_wrapper'>
-                            <Control/>
+                            <Control itembox_info = {this.state.itembox_info} revivalmachine_info = {this.state.revivalmachine_info} tagmachine_info = {this.state.tagmachine_info} duct_info = {this.state.duct_info} generator_info = {this.state.generator_info} escapemachine_info = {this.state.escapemachine_info} temple_info = {this.state.temple_info}/>
                         </div>
                     </div>
                     <div className='device'>
