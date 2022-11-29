@@ -130,15 +130,27 @@ const Control = (props) => {
                 console.log(error);
             });
             if(purpose === 'R'){ //생명장치 활성화 순서 
-                revival_list = []
+                revival_list = [];
+                let order = 0;
                 while(revival_list.length < 10){
                     let num = Math.floor(Math.random()*10)
                     if(!revival_list.includes(revival[num])){
                         revival_list.push(revival[num]);
+                        await axios.post('/api/update', {
+                            theme: 'cyberpunk',
+                            device: 'revivalmachine',
+                            name: revival[num],
+                            num: order, 
+                            command: 'activate_num'
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                        order++;
                     }
+                    
                 }
                 setRevivalOrder(revival_list)
-                console.log(revival_order)
             }
             else if(purpose === 'S'){
                 await axios.post('/api/reset', {
@@ -237,17 +249,6 @@ const Control = (props) => {
                         </Button>
                     </Modal.Footer>
                 </Modal>
-            </div>
-            <div className='revival_order'>
-                <p className='revival_font_name'>생명장치</p>
-                <p className='revival_font'>32:00 - {revival_order[0]} {revival_order[1]} {revival_order[2]}</p>
-                <p className='revival_font'>29:00 - {revival_order[3]}</p>
-                <p className='revival_font'>26:00 - {revival_order[4]}</p>
-                <p className='revival_font'>23:00 - {revival_order[5]}</p>
-                <p className='revival_font'>20:00 - {revival_order[6]}</p>
-                <p className='revival_font'>17:00 - {revival_order[7]}</p>
-                <p className='revival_font'>14:00 - {revival_order[8]}</p>
-                <p className='revival_font'>11:00 - {revival_order[9]}</p>
             </div>
             <Narration time = {timer} revival_order = {revival_order} device_info = {props} timer_control = {timer_control}/>
         </>

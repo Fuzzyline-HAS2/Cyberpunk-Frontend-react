@@ -8,101 +8,115 @@ const Narration = (props) => {
     const [templetakenchip,setTempleTakenChip]=useState(0);
     const [escapeescape,setEscapeEscape]=useState(0);
     const [taggerActivate,setTaggerActivate]=useState('');
+    const [gameover,setGameOver]=useState(false);
     /**
     * @brief time에 따라 내레이션을 결정해주는 함수 
     */
-    const narration_time = (time) => { 
+    const narration_time = (time,revival) => { 
         console.log(time)
-        switch (time){
-            case 2099:
-                iotglove_activate('tagger_blink');
-                narration(1,1) //0001 VO1 하이드앤시크 프로젝트에 오신 것을 환영합니다. 모든 플레이어는 진입해주십시오
-                break;
-            case 2098:
-                narration(1,2) //0002 VO2 술래의 등장 이전까지는 문을 제외한 장치의 사용이 불가합니다, 지형지물과 장치의 위치를 파악하십시오
-                break;
-            case 2097:
-                narration(1,3) //0003 VO3 술래는 랜덤한 플레이어로 결정됩니다, 모두 흩어져 서로를 경계하십시오
-                break;
-            case 2050:
-                narration(1,55) //0055 VO47 술래결정전까지는 장치이용안됩니다 빨간색이면 쓰면 안됨
-                break;
-            case 1983:
-                narration(1,63) //0063 VO55 1분후 술래가 결정됩니다 (2)
-                break;
-            case 1953:
-                narration(1,4) //0004 VO4 술래 결정까지 30초 남았습니다,
-                break;
-            case 1929:
-                narration(1,5) //0005 VO5 술래 결정 5초전, 4초, 3초, 2초, 1초
-                break;
-            case 1921:
-                narration(1,56) //0056 VO48 술래가 결정되었습니다. 술래는 제단으로 가 글러브를 활성시켜 주세요
-                // iotglove_activate('tagger_blink');
-                //술래 iot글러브 정상상태는 iotglove 코드에 있음. 
-                break;
-            case 1920:
-                narration(1,31) //0031 VO24 생명장치 활성화
-                break;    
-            case 1919:
-                device_activate('itembox','');
-                device_activate('tagmachine','');
-                device_activate('duct','');
-                device_activate('generator','');
-                device_activate('revivalmachine',props.revival_order[0]);
-                device_activate('revivalmachine',props.revival_order[1]);
-                device_activate('revivalmachine',props.revival_order[2]);
-                break;
-            case 1740:
-                narration(1,31)//0031 VO24 생명장치 활성화
-                break;
-            case 1739:
-                device_activate('revivalmachine',props.revival_order[3]);
-                break;
-            case 1560:
-                narration(1,31)//0031 VO24 생명장치 활성화
-                break;
-            case 1739:
-                device_activate('revivalmachine',props.revival_order[4]);
-                break;
-            case 1380:
-                narration(1,31)//0031 VO24 생명장치 활성화
-                break;
-            case 1739:
-                device_activate('revivalmachine',props.revival_order[5]);
-                break;
-            case 1200:
-                narration(1,31)//0031 VO24 생명장치 활성화
-                break;
-            case 1739:
-                device_activate('revivalmachine',props.revival_order[6]);
-                break;
-            case 1020:
-                narration(1,31)//0031 VO24 생명장치 활성화
-                break;
-            case 1739:
-                device_activate('revivalmachine',props.revival_order[7]);
-                break;
-            case 840:
-                narration(1,31)//0031 VO24 생명장치 활성화
-                break;
-            case 1739:
-                device_activate('revivalmachine',props.revival_order[8]);
-                break;
-            case 660:
-                narration(1,31)//0031 VO24 생명장치 활성화
-                break;
-            case 1739:
-                device_activate('revivalmachine',props.revival_order[9]);
-                break;
-            case 2:
-                narration(1,16)//0016 VO14 탈출제한시간이 끝났습니다, 술래가 승리하였습니다
-                break;
-            case 1:
-                narration(1,61)//0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
-                break;
+        if(revival !== undefined){
+            if(revival.length !== 0){
+                let revival_order = revival.map( x => [x.activate_num, x.device_name] );
+                revival_order.sort();
+                console.log('revival_order:',revival_order)
+                switch (time){
+                    case 2099:
+                        iotglove_activate('tagger_blink');
+                        narration(1,1) //0001 VO1 하이드앤시크 프로젝트에 오신 것을 환영합니다. 모든 플레이어는 진입해주십시오
+                        break;
+                    case 2098:
+                        narration(1,2) //0002 VO2 술래의 등장 이전까지는 문을 제외한 장치의 사용이 불가합니다, 지형지물과 장치의 위치를 파악하십시오
+                        break;
+                    case 2097:
+                        narration(1,3) //0003 VO3 술래는 랜덤한 플레이어로 결정됩니다, 모두 흩어져 서로를 경계하십시오
+                        break;
+                    case 2050:
+                        narration(1,55) //0055 VO47 술래결정전까지는 장치이용안됩니다 빨간색이면 쓰면 안됨
+                        break;
+                    case 1983:
+                        narration(1,63) //0063 VO55 1분후 술래가 결정됩니다 (2)
+                        break;
+                    case 1953:
+                        narration(1,4) //0004 VO4 술래 결정까지 30초 남았습니다,
+                        break;
+                    case 1929:
+                        narration(1,5) //0005 VO5 술래 결정 5초전, 4초, 3초, 2초, 1초
+                        break;
+                    case 1921:
+                        narration(1,56) //0056 VO48 술래가 결정되었습니다. 술래는 제단으로 가 글러브를 활성시켜 주세요
+                        // iotglove_activate('tagger_blink');
+                        //술래 iot글러브 정상상태는 iotglove 코드에 있음. 
+                        break;
+                    case 1920:
+                        narration(1,31) //0031 VO24 생명장치 활성화
+                        break;    
+                    case 1919:
+                        device_activate('itembox','');
+                        device_activate('tagmachine','');
+                        device_activate('duct','');
+                        device_activate('generator','');
+                        device_activate('revivalmachine',revival_order[0][1]);
+                        device_activate('revivalmachine',revival_order[1][1]);
+                        device_activate('revivalmachine',revival_order[2][1]);
+                        break;
+                    case 1740:
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
+                    case 1739:
+                        device_activate('revivalmachine',revival_order[3][1]);
+                        console.log(revival_order[3][1])
+                        break;
+                    case 1560:
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
+                    case 1559:
+                        device_activate('revivalmachine',revival_order[4][1]);
+                        console.log(revival_order[4][1])
+                        break;
+                    case 1380:
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
+                    case 1379:
+                        device_activate('revivalmachine',revival_order[5][1]);
+                        console.log(revival_order[5][1])
+                        break;
+                    case 1200:
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
+                    case 1199:
+                        device_activate('revivalmachine',revival_order[6][1]);
+                        console.log(revival_order[6][1])
+                        break;
+                    case 1020:
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
+                    case 1019:
+                        device_activate('revivalmachine',revival_order[7][1]);
+                        console.log(revival_order[7][1])
+                        break;
+                    case 840:
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
+                    case 839:
+                        device_activate('revivalmachine',revival_order[8][1]);
+                        console.log(revival_order[8][1])
+                        break;
+                    case 660:
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
+                    case 659:
+                        device_activate('revivalmachine',revival_order[9][1]);
+                        console.log(revival_order[9][1])
+                        break;
+                    case 2:
+                        narration(1,16)//0016 VO14 탈출제한시간이 끝났습니다, 술래가 승리하였습니다
+                        break;
+                    case 1:
+                        narration(1,61)//0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
+                        break;
+                }
+            }
         }
-
     }
 
     const itembox = (itembox) => {
@@ -187,8 +201,8 @@ const Narration = (props) => {
         let takenchip = 0;
         if(temple !== undefined){
             if(temple.length !== 0){
-                console.log('temple[0][device_state] : ',temple[0]['device_state'])
-                console.log('taggerActivate : ',taggerActivate)
+                // console.log('temple[0][device_state] : ',temple[0]['device_state'])
+                // console.log('taggerActivate : ',taggerActivate)
                 if(temple[0]['device_state'] === 'activate' && temple[0]['device_state'] !== taggerActivate){
                     console.log('taggerActivate:',taggerActivate)
                     setTaggerActivate('activate');
@@ -278,11 +292,28 @@ const Narration = (props) => {
                 console.log(error);
             });
     }
+    const revival_activate_num = (revival) => {
+        if(revival !== undefined){
+            if(revival.length !== 0){
+                let revival_order = revival.map( x => [x.activate_num, x.device_name] );
+                revival_order.sort();
+                return  <div>
+                            <p className='revival_font'>32:00 - {revival_order[0][1]} {revival_order[1][1]} {revival_order[2][1]}</p>
+                            <p className='revival_font'>29:00 - {revival_order[3][1]}</p>
+                            <p className='revival_font'>26:00 - {revival_order[4][1]}</p>
+                            <p className='revival_font'>23:00 - {revival_order[5][1]}</p>
+                            <p className='revival_font'>20:00 - {revival_order[6][1]}</p>
+                            <p className='revival_font'>17:00 - {revival_order[7][1]}</p>
+                            <p className='revival_font'>14:00 - {revival_order[8][1]}</p>
+                            <p className='revival_font'>11:00 - {revival_order[9][1]}</p>
+                        </div>
+            }
+        }
+    }
 
     return(
         <>
-        {/* {console.log(props.device_info)} */}
-            {narration_time(props.time, props.revival_order)}
+            {narration_time(props.time, props.device_info.revivalmachine_info)}
             {itembox(props.device_info.itembox_info)}
             {generator(props.device_info.generator_info)}
             {revivalmachine(props.device_info.revivalmachine_info)}
@@ -297,6 +328,11 @@ const Narration = (props) => {
                 <p className='progress_font'>남은 생명 : {10-templetakenchip}/10</p>
                 <p className='progress_font'>자가부활 : ??:??</p>
             </div>
+            <div className='controler_revival_order'>
+                <p className='revival_font_name'>생명장치</p>
+                {revival_activate_num(props.device_info.revivalmachine_info)}
+            </div>
+            
         </>
     )
 }

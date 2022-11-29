@@ -44,7 +44,7 @@
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .controler_game_progress {
-    grid-column: 6/7;
+    grid-column: 5/6;
     grid-row: 1;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
