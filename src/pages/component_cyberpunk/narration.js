@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from "axios";
 
+import Button from 'react-bootstrap/Button';
+
 const Narration = (props) => {
     const [itemused,setItemUsed]=useState(0);
     const [generatorrepaired,setGeneratorRepaired]=useState(0);
@@ -18,10 +20,9 @@ const Narration = (props) => {
             if(revival.length !== 0){
                 let revival_order = revival.map( x => [x.activate_num, x.device_name] );
                 revival_order.sort();
-                console.log('revival_order:',revival_order)
+                // console.log('revival_order:',revival_order)
                 switch (time){
                     case 2099:
-                        iotglove_activate('tagger_blink');
                         narration(1,1) //0001 VO1 하이드앤시크 프로젝트에 오신 것을 환영합니다. 모든 플레이어는 진입해주십시오
                         break;
                     case 2098:
@@ -44,11 +45,11 @@ const Narration = (props) => {
                         break;
                     case 1921:
                         narration(1,56) //0056 VO48 술래가 결정되었습니다. 술래는 제단으로 가 글러브를 활성시켜 주세요
-                        // iotglove_activate('tagger_blink');
                         //술래 iot글러브 정상상태는 iotglove 코드에 있음. 
                         break;
                     case 1920:
                         narration(1,31) //0031 VO24 생명장치 활성화
+                        iotglove_activate('tagger_blink');
                         break;    
                     case 1919:
                         device_activate('itembox','');
@@ -201,8 +202,8 @@ const Narration = (props) => {
         let takenchip = 0;
         if(temple !== undefined){
             if(temple.length !== 0){
-                // console.log('temple[0][device_state] : ',temple[0]['device_state'])
-                // console.log('taggerActivate : ',taggerActivate)
+                console.log('temple[0][device_state] : ',temple[0]['device_state'])
+                console.log('taggerActivate : ',taggerActivate)
                 if(temple[0]['device_state'] === 'activate' && temple[0]['device_state'] !== taggerActivate){
                     console.log('taggerActivate:',taggerActivate)
                     setTaggerActivate('activate');
@@ -262,14 +263,6 @@ const Narration = (props) => {
             .catch(function (error) {
                 console.log(error);
             });
-        if(folder_num === 1 && file_num === 61){
-            setItemUsed(0);
-            setGeneratorRepaired(0);
-            setRevivalUsed(0);
-            setTempleTakenChip(0);
-            setEscapeEscape(0);
-            setTaggerActivate('');
-        }
     }
     const device_activate = async(device_type,device_name)=>{
         await axios.post('/api/update/device', {
@@ -310,15 +303,43 @@ const Narration = (props) => {
             }
         }
     }
+    const narration_reset = async() => {
+        await axios.post('/api/reset', {
+            theme: 'cyberpunk',
+            device: 'mp3',
+            command: 'mp3_reset'
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+        setItemUsed(0);
+        setGeneratorRepaired(0);
+        setRevivalUsed(0);
+        setTempleTakenChip(0);
+        setEscapeEscape(0);
+        setTaggerActivate('');
+    }
 
     return(
         <>
+            <style type="text/css">
+                {`
+                    .btn-narration_reset {
+                        padding: 6px 32px;
+                        font-size: 14px;
+                    }
+                `}
+            </style>
             {narration_time(props.time, props.device_info.revivalmachine_info)}
             {itembox(props.device_info.itembox_info)}
             {generator(props.device_info.generator_info)}
             {revivalmachine(props.device_info.revivalmachine_info)}
             {temple(props.device_info.temple_info)}
             {escapemachine(props.device_info.escapemachine_info)}
+            <div className='controler_narration'>
+                <p style = {{margin : "0px 0px 0px 0px", textAlign : "center"}}>내레이션</p>
+                <Button variant="secondary" size = 'narration_reset' onClick={narration_reset} style = {{margin : "0px 0px 0px 0px"}}>내레이션 초기화</Button>
+            </div>
             <div className='controler_game_progerss'>
                 <p className='progress_font_name'>게임 진행도 </p>
                 <p className='progress_font'>빈 아이템박스 : {itemused}/10</p>
