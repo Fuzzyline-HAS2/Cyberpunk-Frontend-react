@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from "axios";
 
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 
 const Narration = (props) => {
     const [itemused,setItemUsed]=useState(0);
@@ -10,7 +11,14 @@ const Narration = (props) => {
     const [templetakenchip,setTempleTakenChip]=useState(0);
     const [escapeescape,setEscapeEscape]=useState(0);
     const [taggerActivate,setTaggerActivate]=useState('');
-    const [gameover,setGameOver]=useState(false);
+    const [gamegroup,setGameGroup]=useState('non');
+    const [player,setPlayer]=useState(0);
+    const [selfrevivalstart,setSelfRevivalStart]=useState(-10);
+    const [selfrevivalend,setSelfRevivalEnd]=useState(-10);
+
+    const [selfreviveshow, setSelfReviveShow] = useState(false);
+    const handleClose = () => setSelfReviveShow(false);
+    const handleShow = () => setSelfReviveShow(true);
     /**
     * @brief time에 따라 내레이션을 결정해주는 함수 
     */
@@ -114,6 +122,41 @@ const Narration = (props) => {
                         break;
                     case 1:
                         narration(1,61)//0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
+                        break;
+                    case selfrevivalstart: 
+                        self_revival('cyberpunk','revivalmachine','all','self_revive_start')
+                        break;
+                    case selfrevivalend:
+                        let revival = [];
+                        let n = 0; 
+                        if(time >= 1740){
+                            n = 3;
+                        }
+                        else if(time >= 1560){
+                            n = 4;
+                        }
+                        else if(time >= 1380){
+                            n = 5;
+                        }
+                        else if(time >= 1200){
+                            n = 6;
+                        }
+                        else if(time >= 1020){
+                            n = 7;
+                        }
+                        else if(time >= 840){
+                            n = 8;
+                        }
+                        else if(time >= 660){
+                            n = 9;
+                        }
+                        else {
+                            n = 10;
+                        }
+                        for(let i = 0;i <n;i++){
+                            revival.push(revival_order[i][1]);
+                        }
+                        self_revival('cyberpunk','revivalmachine',revival,'self_revive_end')
                         break;
                 }
             }
@@ -285,6 +328,17 @@ const Narration = (props) => {
                 console.log(error);
             });
     }
+    const self_revival = async(theme,device_type,device_name,command) => {
+        await axios.post('/api/update/selfrevive',{
+            theme : theme,
+            device_type : device_type,
+            device_name : device_name,
+            command : command
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+    }
     const revival_activate_num = (revival) => {
         if(revival !== undefined){
             if(revival.length !== 0){
@@ -318,36 +372,87 @@ const Narration = (props) => {
         setTempleTakenChip(0);
         setEscapeEscape(0);
         setTaggerActivate('');
+        setSelfRevivalStart(-10);
+        setSelfRevivalEnd(-10);
     }
-
+    const iotglove_cyberpunk = async() => {
+        await axios.get('/api/iotglove_refresh_request');
+        let iot = await axios.get('/api/DB_iotglove');
+        let player = 0;
+        console.log(iot.data)
+        if(iot.data.device[0].theme === 'cyberpunk'){
+            setGameGroup('G1');
+            for(let i = 0; i<iot.data.g1.length;i++){
+                if(iot.data.g1[i].role !== 'neutral'){
+                    ++player;
+                }
+            }
+            setPlayer(player);
+        }
+        else if(iot.data.device[8].theme === 'cyberpunk'){
+            setGameGroup('G2');
+            for(let i = 0; i<iot.data.g2.length;i++){
+                if(iot.data.g2[i].role !== 'neutral'){
+                    ++player;
+                }
+            }
+            setPlayer(player);
+        }
+    }
+    const self_revive = (templetakenchip,player,revivalused,time) => {
+        console.log(selfrevivalstart);
+        console.log(player-1+revivalused)
+        if(player-1+revivalused === templetakenchip){
+            if(selfrevivalstart === -10){
+                narration(1,48); //0048 VO40 자가부활
+                handleShow();
+                setSelfRevivalStart(time-30);
+                setSelfRevivalEnd(time-90);
+            }
+        }
+    }
     return(
         <>
+        {console.log('selfrevivalstart :', selfrevivalstart)}
+        {console.log('selfrevivalend :',selfrevivalend )}
             <style type="text/css">
                 {`
                     .btn-narration_reset {
                         padding: 6px 32px;
                         font-size: 14px;
                     }
+                    .btn-player_check {
+                        padding: 6px 39px;
+                        font-size: 14px;
+                    }
                 `}
             </style>
+            <Modal show={selfreviveshow} onHide={handleClose}>
+                <Modal.Header closeButton>
+                <Modal.Title>자가 부활 모드 ON</Modal.Title>
+                </Modal.Header>
+            </Modal>
             {narration_time(props.time, props.device_info.revivalmachine_info)}
             {itembox(props.device_info.itembox_info)}
             {generator(props.device_info.generator_info)}
             {revivalmachine(props.device_info.revivalmachine_info)}
             {temple(props.device_info.temple_info)}
             {escapemachine(props.device_info.escapemachine_info)}
+            {self_revive(templetakenchip,player,revivalused,props.time)} {/* 자가부활모드 */}
             <div className='controler_narration'>
                 <p style = {{margin : "0px 0px 0px 0px", textAlign : "center"}}>내레이션</p>
                 <Button variant="secondary" size = 'narration_reset' onClick={narration_reset} style = {{margin : "0px 0px 0px 0px"}}>내레이션 초기화</Button>
+                <Button variant="warning" size = 'player_check' onClick={iotglove_cyberpunk} style = {{margin : "0px 0px 0px 0px"}}>플레이어 확인</Button>
             </div>
             <div className='controler_game_progerss'>
-                <p className='progress_font_name'>게임 진행도 </p>
+                <p className='progress_font_name' style={{margin : '0px 0px 0px 0px'}}>게임 진행도 </p>
+                <p className='progress_font'>글러브 : {gamegroup}, 총 : {player}</p>
                 <p className='progress_font'>빈 아이템박스 : {itemused}/10</p>
                 <p className='progress_font'>수리 완료 발전기 : {generatorrepaired}/3</p>
                 <p className='progress_font'>사용된 부활장치 : {revivalused}/10</p>
                 <p className='progress_font'>제단 생명칩 개수 : {templetakenchip}/10</p>
                 <p className='progress_font'>남은 생명 : {10-templetakenchip}/10</p>
-                <p className='progress_font'>자가부활 : ??:??</p>
+                <p className='progress_font'>자가부활 시간: {props.time-selfrevivalend>90?'X':props.time-selfrevivalend}</p>
             </div>
             <div className='controler_revival_order'>
                 <p className='revival_font_name'>생명장치</p>
