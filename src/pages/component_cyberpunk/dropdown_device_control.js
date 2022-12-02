@@ -120,6 +120,7 @@ const MYDropdownDeviceControl = (props) => {
             { value: "game_state_A", name: "활성화(A)" },
             { value: "device_state_check", name: "장치 확인(check)" },
             { value: "device_state_battery_max", name: "배터리공급완료(battery_max)" },
+            { value: "device_state_starter_finish", name: "스타터완료(starter_finish)" },
             { value: "device_state_repaired", name: "수리완료(repaired)" },
             { value: "device_state_repaired_all", name: "전체수리완료(repaired_all)" },
             

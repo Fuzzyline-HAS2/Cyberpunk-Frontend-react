@@ -39,13 +39,6 @@ const Group = (props) => {
         let background_out;
         let color_theme;
         if(group !== undefined && group_info !== undefined){
-            //장치 on/off 구분
-            if(group.shift_machine > 1){
-                color_online = 'off';
-            }
-            else {
-                color_online = 'on';
-            }
             //생명칩 개수에 따라 역할 변경 player <-> ghost
             if(group_info.role === 'player' && group_info.life_chip <1){
                 console.log('ghost로 변경')
@@ -90,7 +83,7 @@ const Group = (props) => {
                     break;
             }
             switch(group_info.game_state){
-                case 'stop':
+                case 'setting':
                     if(group_info.role === 'neutral'){
                         color_game_state = 'gray';
                     }
@@ -108,7 +101,7 @@ const Group = (props) => {
                     break;
             }
             switch(group_info.device_state){
-                case 'stop':
+                case 'setting':
                     if(group_info.role === 'neutral'){
                         color_device_state = 'gray';
                     }
@@ -128,16 +121,33 @@ const Group = (props) => {
                 default:
                     break;
             }
+            //장치 on/off 구분
+            if(group.shift_machine > 1){
+                color_online = 'off';
+            }
+            else {
+                color_online = 'on';
+            }
             if(group_info.role === 'neutral' || group.theme === 'waiting'){
                 text = 'dark';
                 background_out = 'gray';
                 background_in = 'gray';
             }
             else {
-                text = 'dark';
-                background_out = 'white_outline';
-                background_in = 'beige';
+                //장치 on/off 구분
+                if(group.shift_machine > 1){
+                    color_online = 'off';
+                    background_out = 'off';
+                    background_in = 'off';
+                }
+                else {
+                    color_online = 'on';
+                    text = 'dark';
+                    background_out = 'white_outline';
+                    background_in = 'beige';
+                }
             }
+            
             life_chip = group_info.life_chip + '/' + group_info.max_life_chip;
             battery_pack = group_info.battery_pack + '/' + group_info.max_battery_pack;
             exp = group_info.exp + '/' + group_info.max_exp;
@@ -189,7 +199,7 @@ const Group = (props) => {
             <style type="text/css">
             {`
                 .bg-on {
-                    background-color: green;
+                    background-color: white;
                     color: black;
                 }
                 .bg-off {

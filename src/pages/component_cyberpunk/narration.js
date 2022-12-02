@@ -126,6 +126,9 @@ const Narration = (props) => {
                     case selfrevivalstart: 
                         self_revival('cyberpunk','revivalmachine','all','self_revive_start')
                         break;
+                    case selfrevivalstart-2: 
+                        narration(1,31)//0031 VO24 생명장치 활성화
+                        break;
                     case selfrevivalend:
                         let revival = [];
                         let n = 0; 
@@ -235,8 +238,8 @@ const Narration = (props) => {
                         narration(1,61) //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
                     }, 1000);
                 }
-                props.timer_control('playtime','stop');
-                // timer_stop('playtime','stop');
+                props.timer_control('playtime','setting');
+                // timer_stop('playtime','setting');
                 setEscapeEscape(escape);
             }
         }
@@ -285,7 +288,7 @@ const Narration = (props) => {
                             break;
                         case 0: //술래승리
                             narration(1,15) //0015 VO13 제단이 활성화 되었습니다. 술래가 승리하였습니다.
-                            props.timer_control('playtime','stop');
+                            props.timer_control('playtime','setting');
                             setTimeout(function() {
                                 narration(1,61) //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
                             }, 1000);
@@ -406,8 +409,9 @@ const Narration = (props) => {
             if(selfrevivalstart === -10){
                 narration(1,48); //0048 VO40 자가부활
                 handleShow();
-                setSelfRevivalStart(time-30);
-                setSelfRevivalEnd(time-90);
+                setSelfRevivalStart(time-40); //자가부활 시작시간: 생존자가 모두 죽은 뒤 30초 후이지만 
+                //한명의 생존자가 사망하였습니다, 남은 생명은 n개 입니다. mp3파일이 재생되느라 자가부활 음성이 밀리기때문에 10초정도 더 뒤로 
+                setSelfRevivalEnd(time-100);
             }
         }
     }
@@ -452,7 +456,7 @@ const Narration = (props) => {
                 <p className='progress_font'>사용된 부활장치 : {revivalused}/10</p>
                 <p className='progress_font'>제단 생명칩 개수 : {templetakenchip}/10</p>
                 <p className='progress_font'>남은 생명 : {10-templetakenchip}/10</p>
-                <p className='progress_font'>자가부활 시간: {props.time-selfrevivalend>90?'X':props.time-selfrevivalend}</p>
+                <p className='progress_font'>자가부활 시간: {props.time-selfrevivalend>90?'X':props.time-selfrevivalend < 0? '사용완료':props.time-selfrevivalend}</p>
             </div>
             <div className='controler_revival_order'>
                 <p className='revival_font_name'>생명장치</p>
