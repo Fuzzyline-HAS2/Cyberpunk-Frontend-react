@@ -182,6 +182,7 @@ const ThemeControl = () => {
                         <Button variant="secondary" size = 'sm' onClick = {()=>photo(group)}>사진촬영</Button>
                         {reset(group)}
                         <Button variant="light" size = 'sm' onClick = {()=>stateChange(group,'setting')}>S</Button><Button variant="danger" size = 'sm' onClick = {()=>stateChange(group,'ready')}>R</Button><Button variant="warning" size = 'sm' onClick = {()=>stateChange(group,'activate')}>A</Button><br></br>
+                        <Button variant="device_purple" size = 'sm' onClick = {()=>stateChange(group,'blink')}>술래 결정</Button><br></br><Button variant="warning" size = 'sm' onClick = {()=>stateChange(group,'activate')}>술래 활성화</Button><br></br>
                         <span style={{margin : '0px 5px 0px 0px'}}>참여결정</span><span style={{margin : '0px 0px 0px 5px'}}>술래결정</span>
                         <form>
                             <input type="checkbox" name = "chosen_iot_glove" value = {glove[0]}
@@ -560,6 +561,14 @@ const ThemeControl = () => {
     }
     return (
         <>
+            <style type="text/css">
+            {`
+                .btn-device_purple {
+                    background-color: rgba(211, 158, 255, 0.61);
+                    color: black;
+                }
+            `}
+            </style>
             {/* {console.log(taggercheck)} */}
             {exerciseroom()}
             {cyberpunk()}

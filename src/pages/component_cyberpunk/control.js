@@ -129,7 +129,7 @@ const Control = (props) => {
             .catch(function (error) {
                 console.log(error);
             });
-            if(purpose === 'R'){ //생명장치 활성화 순서 
+            if(purpose === 'R'){ //생명장치 활성화 순서 DB에 저장
                 revival_list = [];
                 let order = 0;
                 while(revival_list.length < 10){
@@ -152,7 +152,7 @@ const Control = (props) => {
                 }
                 setRevivalOrder(revival_list)
             }
-            else if(purpose === 'S'){
+            else if(purpose === 'S'){ //전체 장치 세팅할때 DB 리셋툄. 
                 await axios.post('/api/reset', {
                     theme: 'cyberpunk',
                     device: 'all_except_iot',
@@ -188,6 +188,10 @@ const Control = (props) => {
                 {`
                     .btn-game_start {
                         padding: 6px 36px;
+                        font-size: 14px;
+                    }
+                    .btn-game_setting {
+                        padding: 6px 10px;
                         font-size: 14px;
                     }
                     .bg-bdg {
@@ -232,7 +236,7 @@ const Control = (props) => {
             </div>
             <div className='controler_game_start'>
                 <Button variant="info" size = 'game_start' onClick={()=>{button_all_device('check')}}>전체 장치 확인</Button>
-                <Button variant="light" size = 'game_start' onClick={()=>{button_all_device('S')}}>전체 장치 세팅</Button>
+                <Button variant="light" size = 'game_setting' onClick={()=>{button_all_device('S')}}>전체 장치 리셋 & 세팅</Button>
                 <Button variant="danger" size = 'game_start' onClick={()=>{button_all_device('R')}}>전체 장치 준비</Button>
                 <Button variant="success" style = {{fontSize : '24px', margin : '0px 0px 1px 0px'}} onClick={game_startShow}>GAME START</Button>
                 <Modal show={game_start_show} onHide={game_startClose} animation={false}>

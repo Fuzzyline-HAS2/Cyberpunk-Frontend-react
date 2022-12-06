@@ -33,10 +33,10 @@ const Narration = (props) => {
                     case 2099:
                         narration(1,1) //0001 VO1 하이드앤시크 프로젝트에 오신 것을 환영합니다. 모든 플레이어는 진입해주십시오
                         break;
-                    case 2098:
+                    case 2095:
                         narration(1,2) //0002 VO2 술래의 등장 이전까지는 문을 제외한 장치의 사용이 불가합니다, 지형지물과 장치의 위치를 파악하십시오
                         break;
-                    case 2097:
+                    case 2090:
                         narration(1,3) //0003 VO3 술래는 랜덤한 플레이어로 결정됩니다, 모두 흩어져 서로를 경계하십시오
                         break;
                     case 2050:
@@ -190,15 +190,22 @@ const Narration = (props) => {
             })
             // console.log(repaired)
             if(repaired !== generatorrepaired){
+
                 switch (repaired){
                     case 1 :
+                        console.log('1개 수리')
                         narration(3,3) //0003 VO38 남은 전원공급장치는 2개 입니다
+                        left_generator(-1);
                         break;
                     case 2 :
+                        console.log('2개 수리')
                         narration(3,2) //0002 VO37 남은 전원공급장치는 1개 입니다
+                        left_generator(-1);
                         break;
                     case 3 :
+                        console.log('3개 수리')
                         narration(3,1) //0001 VO22 모든 전원공급장치의 수리가 완료되었습니다.
+                        left_generator(-1);
                         break;
                 }
                 setGeneratorRepaired(repaired);
@@ -238,7 +245,7 @@ const Narration = (props) => {
                         narration(1,61) //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
                     }, 1000);
                 }
-                props.timer_control('playtime','setting');
+                props.timer_control('playtime','stop');
                 // timer_stop('playtime','setting');
                 setEscapeEscape(escape);
             }
@@ -250,6 +257,7 @@ const Narration = (props) => {
             if(temple.length !== 0){
                 console.log('temple[0][device_state] : ',temple[0]['device_state'])
                 console.log('taggerActivate : ',taggerActivate)
+                console.log("temple[0]['taken_chip']",temple[0]['taken_chip'])
                 if(temple[0]['device_state'] === 'activate' && temple[0]['device_state'] !== taggerActivate){
                     console.log('taggerActivate:',taggerActivate)
                     setTaggerActivate('activate');
@@ -288,7 +296,7 @@ const Narration = (props) => {
                             break;
                         case 0: //술래승리
                             narration(1,15) //0015 VO13 제단이 활성화 되었습니다. 술래가 승리하였습니다.
-                            props.timer_control('playtime','setting');
+                            props.timer_control('playtime','stop');
                             setTimeout(function() {
                                 narration(1,61) //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
                             }, 1000);
@@ -298,7 +306,17 @@ const Narration = (props) => {
             }
         }
     }
-
+    const left_generator = async(value) => {
+        await axios.post('/api/update', {
+                theme: 'cyberpunk',
+                device: 'generator',
+                value: value,
+                command: 'left_generator'
+                })
+                .catch(function (error) {
+                    console.log(error);
+                });
+    }
     const narration = async(folder_num,file_num)=>{
         await axios.post('/api/narration', {
             theme: 'cyberpunk',

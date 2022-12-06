@@ -112,6 +112,8 @@ const MYDropdownDeviceControl = (props) => {
             { value: "game_state_R", name: "준비(R)" },
             { value: "game_state_A", name: "활성화(A)" },
             { value: "device_state_check", name: "장치 확인(check)" },
+            { value: "device_state_open", name: "도어오픈(open)" },
+            { value: "device_state_lock", name: "도어잠금(lock)" },
         ],
         generator : [
             { value: "명령어", name: "명령어" },
