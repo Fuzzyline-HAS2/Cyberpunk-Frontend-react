@@ -118,6 +118,12 @@ const Group = (props) => {
                 case 'blink':
                     color_device_state = 'device_purple';
                     break;
+                case 'player_win':
+                    color_device_state = 'green';
+                    break;
+                case 'player_lose':
+                    color_device_state = 'purple';
+                    break;
                 default:
                     break;
             }

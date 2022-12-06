@@ -86,6 +86,12 @@ const DeviceInfo = (props) => {
                         case 'takenchip_max':
                             device_color = 'takenchip_max'
                             break;
+                        case 'player_win':
+                            device_color = 'escape'
+                            break;
+                        case 'player_lose':
+                            device_color = 'takenchip_max'
+                            break;
                         case 'emergency':
                             device_color = 'emergency';
                             online_color = 'emergency';

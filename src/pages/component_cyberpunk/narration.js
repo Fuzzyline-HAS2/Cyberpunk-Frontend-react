@@ -119,6 +119,7 @@ const Narration = (props) => {
                         break;
                     case 2:
                         narration(1,16)//0016 VO14 탈출제한시간이 끝났습니다, 술래가 승리하였습니다
+                        game_over('player_lose');
                         break;
                     case 1:
                         narration(1,61)//0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
@@ -241,6 +242,7 @@ const Narration = (props) => {
                 console.log('탈출')
                 if(escape > 0){
                     narration(1,32) //0032 VO25 탈출에 성공하였습니다. 생존자가 승리하였습니다.
+                    game_over('player_win');
                     setTimeout(function() {
                         narration(1,61) //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
                     }, 1000);
@@ -296,6 +298,7 @@ const Narration = (props) => {
                             break;
                         case 0: //술래승리
                             narration(1,15) //0015 VO13 제단이 활성화 되었습니다. 술래가 승리하였습니다.
+                            game_over('player_lose');
                             props.timer_control('playtime','stop');
                             setTimeout(function() {
                                 narration(1,61) //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요 
@@ -339,6 +342,24 @@ const Narration = (props) => {
                 console.log(error);
             });
     }
+    /**
+    * @brief 게임이 종료되었을 때 player_win & player_lose로 device_state를 변경해주는 함수 
+    * @param device_state 게임이 끝났을 때 device_state
+    */
+    const game_over = async(device_state) => {
+        await axios.post('/api/update/all',{
+            theme: 'cyberpunk',
+            device: 'all',
+            glove: gamegroup,
+            state: device_state
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+    }
+    /**
+    * @brief iot글러브를 활성화시키는 함수  
+    */
     const iotglove_activate = async(command)=>{
         await axios.post('/api/update/iotglove', {
             theme: 'cyberpunk',
@@ -349,6 +370,9 @@ const Narration = (props) => {
                 console.log(error);
             });
     }
+    /**
+    * @brief 부활장치 활성화 순서에 따라 활성화 시키는 함수 
+    */
     const self_revival = async(theme,device_type,device_name,command) => {
         await axios.post('/api/update/selfrevive',{
             theme : theme,
@@ -360,6 +384,9 @@ const Narration = (props) => {
             console.log(error);
         });
     }
+    /**
+    * @brief 부활장치 활성화 순서를 출력해줌 
+    */
     const revival_activate_num = (revival) => {
         if(revival !== undefined){
             if(revival.length !== 0){
@@ -378,6 +405,9 @@ const Narration = (props) => {
             }
         }
     }
+    /**
+    * @brief 내레이션 DB를 리셋하고 게임에 필요한 변수(state)를 초기화하는 함수
+    */
     const narration_reset = async() => {
         await axios.post('/api/reset', {
             theme: 'cyberpunk',
@@ -396,6 +426,9 @@ const Narration = (props) => {
         setSelfRevivalStart(-10);
         setSelfRevivalEnd(-10);
     }
+    /**
+    * @brief 게임하고있는 플레이어의 수 계산하는 함수 
+    */
     const iotglove_cyberpunk = async() => {
         await axios.get('/api/iotglove_refresh_request');
         let iot = await axios.get('/api/DB_iotglove');
@@ -420,10 +453,13 @@ const Narration = (props) => {
             setPlayer(player);
         }
     }
+    /**
+    * @brief 자가부활모드 시작, 종료시간 지정하는 함수 
+    */
     const self_revive = (templetakenchip,player,revivalused,time) => {
-        console.log(selfrevivalstart);
-        console.log(player-1+revivalused)
-        if(player-1+revivalused === templetakenchip){
+        // console.log(selfrevivalstart);
+        // console.log(player-1+revivalused)
+        if(player-1+revivalused === templetakenchip){//술래가 제단에 모은 칩 === 생존자수 + 부활장치 이용개수
             if(selfrevivalstart === -10){
                 narration(1,48); //0048 VO40 자가부활
                 handleShow();
