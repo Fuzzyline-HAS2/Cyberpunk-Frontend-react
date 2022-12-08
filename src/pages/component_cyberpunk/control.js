@@ -186,13 +186,22 @@ const Control = (props) => {
         <>
             <style type="text/css">
                 {`
-                    .btn-game_start {
-                        padding: 6px 36px;
+                    .btn-game_check {
+                        padding: 6px 37px;
                         font-size: 14px;
                     }
                     .btn-game_setting {
-                        padding: 6px 10px;
+                        padding: 6px 7px;
                         font-size: 14px;
+                    }
+                    .btn-game_ready {
+                        padding: 6px 32px;
+                        font-size: 14px;
+                    }
+                    .btn-game_start {
+                        padding: 11px 25px;
+                        font-size: 20px;
+                        margin: 0px 0px 0px 0px
                     }
                     .bg-bdg {
                         background-color: light;
@@ -235,10 +244,10 @@ const Control = (props) => {
                 </div>
             </div>
             <div className='controler_game_start'>
-                <Button variant="info" size = 'game_start' onClick={()=>{button_all_device('check')}}>전체 장치 확인</Button>
-                <Button variant="light" size = 'game_setting' onClick={()=>{button_all_device('S')}}>전체 장치 리셋 & 세팅</Button>
-                <Button variant="danger" size = 'game_start' onClick={()=>{button_all_device('R')}}>전체 장치 준비</Button>
-                <Button variant="success" style = {{fontSize : '24px', margin : '0px 0px 1px 0px'}} onClick={game_startShow}>GAME START</Button>
+                <Button variant="info" size = 'game_check' onClick={()=>{button_all_device('check')}}>전체 장치 확인</Button>
+                <Button variant="light" size = 'game_setting' onClick={()=>{button_all_device('S')}}>1.전체 장치 리셋 & 세팅</Button>
+                <Button variant="danger" size = 'game_ready' onClick={()=>{button_all_device('R')}}>2.전체 장치 준비</Button>
+                <Button variant="success" size = 'game_start' onClick={game_startShow}>GAME START</Button>
                 <Modal show={game_start_show} onHide={game_startClose} animation={false}>
                     <Modal.Header closeButton>
                         <Modal.Title>GAME START 버튼 입력 감지</Modal.Title>

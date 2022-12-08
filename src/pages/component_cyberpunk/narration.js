@@ -469,6 +469,18 @@ const Narration = (props) => {
             }
         }
     }
+    /**
+    * @brief 강제 자가부활모드 시작, 종료시간 지정하는 함수 
+    */
+    const forced_self_revive = (time) => {
+        if(selfrevivalstart === -10){
+            narration(1,48); //0048 VO40 자가부활
+            handleShow();
+            setSelfRevivalStart(time-30); //자가부활 시작시간: 생존자가 모두 죽은 뒤 30초 후
+            //한명의 생존자가 사망하였습니다, 남은 생명은 n개 입니다.
+            setSelfRevivalEnd(time-90);
+        }
+    }
     return(
         <>
         {console.log('selfrevivalstart :', selfrevivalstart)}
@@ -476,11 +488,11 @@ const Narration = (props) => {
             <style type="text/css">
                 {`
                     .btn-narration_reset {
-                        padding: 6px 32px;
+                        padding: 6px 27px;
                         font-size: 14px;
                     }
                     .btn-player_check {
-                        padding: 6px 39px;
+                        padding: 6px 34px;
                         font-size: 14px;
                     }
                 `}
@@ -499,8 +511,9 @@ const Narration = (props) => {
             {self_revive(templetakenchip,player,revivalused,props.time)} {/* 자가부활모드 */}
             <div className='controler_narration'>
                 <p style = {{margin : "0px 0px 0px 0px", textAlign : "center"}}>내레이션</p>
-                <Button variant="secondary" size = 'narration_reset' onClick={narration_reset} style = {{margin : "0px 0px 0px 0px"}}>내레이션 초기화</Button>
-                <Button variant="warning" size = 'player_check' onClick={iotglove_cyberpunk} style = {{margin : "0px 0px 0px 0px"}}>플레이어 확인</Button>
+                <Button variant="secondary" size = 'narration_reset' onClick={narration_reset} style = {{margin : "0px 0px 0px 0px"}}>3.내레이션 초기화</Button>
+                <Button variant="primary" size = 'player_check' onClick={iotglove_cyberpunk} style = {{margin : "0px 0px 0px 0px"}}>4.플레이어 확인</Button>
+                <Button variant="warning" size = 'player_check' onClick={() => forced_self_revive(props.time)} style = {{margin : "0px 0px 0px 0px"}}>강제 자가부활</Button>
             </div>
             <div className='controler_game_progerss'>
                 <p className='progress_font_name' style={{margin : '0px 0px 0px 0px'}}>게임 진행도 </p>
