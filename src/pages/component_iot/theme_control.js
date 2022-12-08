@@ -151,7 +151,6 @@ const ThemeControl = () => {
         for(let i = 0; i < glove.length ; i++){
             glove[i] = group + glove[i];
         }
-        // console.log(glove)
         if(exercisegroup === group){
             theme_color = 'theme_exerciseroom'
         }
@@ -161,7 +160,6 @@ const ThemeControl = () => {
         else {
             theme_color = 'theme_waiting';
         }
-        // console.log(theme_color)
         switch (group){
             case 'G1' :
                 iotglove_theme = 'iotglove_theme_G1';
@@ -185,6 +183,10 @@ const ThemeControl = () => {
                         <Button variant="device_purple" size = 'sm' onClick = {()=>stateChange(group,'blink')}>술래 결정</Button><br></br><Button variant="warning" size = 'sm' onClick = {()=>stateChange(group,'activate')}>술래 활성화</Button><br></br>
                         <span style={{margin : '0px 5px 0px 0px'}}>참여결정</span><span style={{margin : '0px 0px 0px 5px'}}>술래결정</span>
                         <form>
+                            <input type="checkbox" name = "chosen_iot_glove" value = {glove[0]}
+                            onChange = {iotChosenAll} checked={iotinputcheck.includes('G'+glove[0][1]+'P1')&&iotinputcheck.includes('G'+glove[0][1]+'P2')&&iotinputcheck.includes('G'+glove[0][1]+'P3')&&iotinputcheck.includes('G'+glove[0][1]+'P4')&&iotinputcheck.includes('G'+glove[0][1]+'P5')&&iotinputcheck.includes('G'+glove[0][1]+'P6')&&iotinputcheck.includes('G'+glove[0][1]+'P7')&&iotinputcheck.includes('G'+glove[0][1]+'P8')? true:false}/>
+                            <label>전체선택</label>
+                            <br></br>
                             <input type="checkbox" name = "chosen_iot_glove" value = {glove[0]}
                             onChange = {iotChosen} checked={iotinputcheck.includes(glove[0])? true:false}/>
                             <label className='checkbox_glove_font'>{glove[0]}</label>
@@ -336,14 +338,12 @@ const ThemeControl = () => {
                 tagger = taggerglove4;
                 break;
         }
-        console.log(tagger.length)
         if(theme !== 'exerciseroom' && tagger.length !== 0){
             tagger = [tagger[0]];
         }
         if(tagger.length === 0){
             tagger = [player[0]];        
         }
-        console.log(tagger)
         await axios.post('/api/update/iotglove',{
             theme : theme,
             group : group,
@@ -361,7 +361,6 @@ const ThemeControl = () => {
         }
     }
     const reset = (group) => {
-        console.log(group)
         switch (group) {
             case 'G1':
                 return  <div>
@@ -477,11 +476,53 @@ const ThemeControl = () => {
             setTaggerCheck(taggercheck.filter( (el) => el !== value));
         }
     }
+    const iotChosenAll = (event) => {
+        const value = event.target.value;
+        const checked = event.target.checked;
+        if(checked){
+            if(value.includes("G1")){
+                setIotInputGlove1(['G1P1','G1P2','G1P3','G1P4','G1P5','G1P6','G1P7','G1P8']); 
+                setIotInputCheck([...iotinputcheck,'G1P1','G1P2','G1P3','G1P4','G1P5','G1P6','G1P7','G1P8']);
+                
+            }
+            else if(value.includes("G2")){
+                setIotInputGlove2(['G2P1','G2P2','G2P3','G2P4','G2P5','G2P6','G2P7','G2P8']); 
+                setIotInputCheck([...iotinputcheck,'G2P1','G2P2','G2P3','G2P4','G2P5','G2P6','G2P7','G2P8']);
+            } 
+            else if(value.includes("G3")){
+                setIotInputGlove3(['G3P1','G3P2','G3P3','G3P4','G3P5','G3P6','G3P7','G3P8']); 
+                setIotInputCheck([...iotinputcheck,'G3P1','G3P2','G3P3','G3P4','G3P5','G3P6','G3P7','G3P8']);
+            }
+            else if(value.includes("G4")){
+                setIotInputGlove4(['G4P1','G4P2','G4P3','G4P4','G4P5','G4P6','G4P7','G4P8']); 
+                setIotInputCheck([...iotinputcheck,'G4P1','G4P2','G4P3','G4P4','G4P5','G4P6','G4P7','G4P8']);
+            } 
+            // setIotInputCheck([...iotinputcheck, value]); 
+        }
+        else{
+            if(value.includes("G1")){
+                setIotInputGlove1([])
+                setIotInputCheck(iotinputcheck.filter( (el) => !el.includes('G1')));
+            }
+            else if(value.includes("G2")){
+                setIotInputGlove2([])
+                setIotInputCheck(iotinputcheck.filter( (el) => !el.includes('G2')));
+            } 
+            else if(value.includes("G3")){
+                setIotInputGlove3([])
+                setIotInputCheck(iotinputcheck.filter( (el) => !el.includes('G3')));
+            }
+            else if(value.includes("G4")){
+                setIotInputGlove4([])
+                setIotInputCheck(iotinputcheck.filter( (el) => !el.includes('G4')));
+            } 
+            
+            setTaggerCheck(taggercheck.filter( (el) => el !== value));
+        }
+    }
     const taggerChosen = (event) => {
         const value = event.target.value;
         const checked = event.target.checked;
-        console.log(value)
-        console.log(checked)
         if(checked){
             if(value.includes("G1")){
                 setTaggerGlove1([...taggerglove1, value]); 
@@ -577,11 +618,11 @@ const ThemeControl = () => {
             {GloveGroup('G3')}
             {GloveGroup('G4')}
             
-            {console.log(iotinputglove1)}
+            {/* {console.log(iotinputglove1)} */}
             {/* {console.log(iotinputglove2)}
             {console.log(iotinputglove3)}
             {console.log(iotinputglove4)} */}
-            {console.log(taggerglove1)}
+            {/* {console.log(taggerglove1)} */}
             {/* {console.log(taggerglove2)}
             {console.log(taggerglove3)}
             {console.log(taggerglove4)} */}
