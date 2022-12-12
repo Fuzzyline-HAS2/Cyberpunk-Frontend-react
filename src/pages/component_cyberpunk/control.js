@@ -215,7 +215,7 @@ const Control = (props) => {
             </style>
             <div className='controler_timer'>
                 <p style = {{fontSize : '11px', margin : "0px 0px -5px 0px", textAlign:"center", backgroundColor:"rgba(255, 255, 0, 0.7)"}}>게임도중 [F5 or 페이지 새로고침]시 타이머 돌아가고있는지 확인.</p><br/>
-                <p style = {{fontSize : '11px', margin : "0px 0px -5px 0px", textAlign:"center", backgroundColor:"rgba(255, 255, 0, 0.7)",position: 'absolute', top: '100px', left: '100px'}}>타이머 멈춰있으면 타이머 새로고침 -&gt; 타이머 시작 다시 눌러주기.</p>
+                <p style = {{fontSize : '11px', margin : "0px 0px -5px -70px", textAlign:"center", backgroundColor:"rgba(255, 255, 0, 0.7)",position: 'absolute', top: '100px', left: '100px'}}>타이머 멈춰있으면 타이머 새로고침 -&gt; 타이머 시작 다시 눌러주기.</p>
                 <p style = {{fontSize : '20px', margin : "0px 0px -20px 10px"}}>play time : 35:00</p>
                 <div style = {{position: 'absolute', top: '125px', left: '290px', textAlign: 'center'}}>
                     <Button variant="outline-dark" size = 'sm' style = {{fontSize : '8px'}} onClick = {() => {timer_control('playtime','reload')}}>새로고침</Button><br/>

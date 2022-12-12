@@ -86,7 +86,9 @@ const MYDropdownDeviceControl = (props) => {
             { value: "game_state_A", name: "활성화(A)" },
             { value: "device_state_check", name: "장치 확인(check)" },
             { value: "device_state_open", name: "상자열기(open)" },
-            { value: "device_state_used", name: "상자 사용 완료(used)" }
+            { value: "device_state_used", name: "상자 사용 완료(used)" },
+            { value: "manage_state_mo", name: "강제상자열기(mo)" },
+            { value: "manage_state_mu", name: "강제사용완료(mu)" },
         ],
         revivalmachine : [
             { value: "명령어", name: "명령어" },
@@ -95,7 +97,8 @@ const MYDropdownDeviceControl = (props) => {
             { value: "game_state_A", name: "활성화(A)" },
             { value: "device_state_check", name: "장치 확인(check)" },
             { value: "device_state_self_revive", name: "자가부활(self_revive)" },
-            { value: "device_state_used", name: "사용완료(used)" }
+            { value: "device_state_used", name: "사용완료(used)" },
+            { value: "manage_state_mu", name: "강제사용완료(mu)" },
         ],
         tagmachine : [
             { value: "명령어", name: "명령어" },
@@ -105,6 +108,8 @@ const MYDropdownDeviceControl = (props) => {
             { value: "device_state_check", name: "장치 확인(check)" },
             { value: "device_state_open", name: "도어오픈(open)" },
             { value: "device_state_lock", name: "도어잠금(lock)" },
+            { value: "manage_state_mo", name: "강제도어오픈(mo)" },
+            { value: "manage_state_ml", name: "강제도어잠금(ml)" },
         ],
         duct : [
             { value: "명령어", name: "명령어" },
@@ -112,8 +117,10 @@ const MYDropdownDeviceControl = (props) => {
             { value: "game_state_R", name: "준비(R)" },
             { value: "game_state_A", name: "활성화(A)" },
             { value: "device_state_check", name: "장치 확인(check)" },
-            { value: "device_state_open", name: "도어오픈(open)" },
-            { value: "device_state_lock", name: "도어잠금(lock)" },
+            { value: "device_state_open", name: "덕트오픈(open)" },
+            { value: "device_state_lock", name: "덕트잠금(lock)" },
+            { value: "manage_state_mo", name: "강제덕트오픈(mo)" },
+            { value: "manage_state_ml", name: "강제덕트잠금(ml)" },
         ],
         generator : [
             { value: "명령어", name: "명령어" },
@@ -125,6 +132,10 @@ const MYDropdownDeviceControl = (props) => {
             { value: "device_state_starter_finish", name: "스타터완료(starter_finish)" },
             { value: "device_state_repaired", name: "수리완료(repaired)" },
             { value: "device_state_repaired_all", name: "전체수리완료(repaired_all)" },
+            { value: "manage_state_mbm", name: "강제배터리공급(mbm)" },
+            { value: "manage_state_msf", name: "강제스타터완료(msf)" },
+            { value: "manage_state_mr", name: "강제수리완료(mr)" },
+            { value: "manage_state_mra", name: "강제전체수리(mra)" },
             
         ],
         escapemachine : [
@@ -134,6 +145,7 @@ const MYDropdownDeviceControl = (props) => {
             { value: "game_state_A", name: "활성화(A)" },
             { value: "device_state_check", name: "장치 확인(check)" },
             { value: "device_state_escape", name: "탈출완료(escape)" },
+            { value: "manage_state_me", name: "강제탈출완료(me)" },
         ],
         temple : [
             { value: "명령어", name: "명령어" },
@@ -144,6 +156,7 @@ const MYDropdownDeviceControl = (props) => {
             { value: "device_state_takenchip+1", name: "생명칩+1" },
             { value: "device_state_takenchip-1", name: "생명칩-1" },
             { value: "device_state_takenchip_max", name: "술래승리(takenchip_max)" },
+            { value: "manage_state_mtm", name: "강제술래승리(mtm)" },
         ],
     }
 

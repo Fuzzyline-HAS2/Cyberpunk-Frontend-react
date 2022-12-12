@@ -344,7 +344,7 @@ class Cyberpunk extends Component {
                 `}
                 </style>
                 <div className='wrapper'>
-                    <div className='header'>
+                    <div className='main'>
                         <h1>Cyberpunk</h1>
                         <button onClick={this.refresh} style={{ position: 'absolute', top: '40px', left: '450px' }}>새로고침</button>
                     </div>

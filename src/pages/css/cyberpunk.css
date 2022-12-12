@@ -1,26 +1,27 @@
 .wrapper {
     display: grid;
-    grid-template-columns: 1fr 2fr 3fr 3fr 3fr 3fr 3fr 2fr 1fr; /*repeat(2, 1fr); 1fr 4fr 6fr 6fr 6fr 6fr 6fr 4fr 1fr*/
+    grid-template-columns: 2fr 3fr 3fr 3fr 3fr 3fr 2fr; /*repeat(2, 1fr); 1fr 4fr 6fr 6fr 6fr 6fr 6fr 4fr 1fr*/
     gap: 5px;
     grid-auto-rows: minmax(2vh,auto);
     background-color: rgba(255, 255, 255, 0.7);
     }
-.header {
-    grid-column: 2/-2;
+.main {
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 2/3;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
     }
 .controler {
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 3/4;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
-
 .controler_wrapper {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);; /*repeat(2, 1fr); 1fr 4fr 6fr 6fr 6fr 6fr 6fr 4fr 1fr*/
+    grid-template-columns: repeat(8, 1fr);; /*repeat(2, 1fr); 1fr 4fr 6fr 6fr 6fr 6fr 6fr 4fr 1fr*/
     gap: 5px;
     grid-auto-rows: minmax(2vh,auto);
     background-color: rgba(255, 255, 255, 0.7);
@@ -56,49 +57,57 @@
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .device{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 4/5;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .itembox{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 5;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .revivalmachine{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 6;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .tagmachine{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 7;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .duct{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 8;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .generator{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 9;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .escapemachine{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 10;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
 }
 .temple{
-    grid-column: 2/-2;
+    margin: 0px 10px 0px 10px;
+    grid-column: 1/-1;
     grid-row: 11;
     outline : solid 1px rgb(97, 97, 97);
     background-color: rgba(255, 255, 255, 0.7); 
