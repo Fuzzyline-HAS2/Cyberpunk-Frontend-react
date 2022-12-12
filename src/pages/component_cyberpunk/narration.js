@@ -488,11 +488,15 @@ const Narration = (props) => {
             <style type="text/css">
                 {`
                     .btn-narration_reset {
-                        padding: 6px 27px;
+                        padding: 6px 56px;
                         font-size: 14px;
                     }
                     .btn-player_check {
-                        padding: 6px 34px;
+                        padding: 6px 63px;
+                        font-size: 14px;
+                    }
+                    .btn-self_revive_button {
+                        padding: 6px 71px;
                         font-size: 14px;
                     }
                 `}
@@ -511,9 +515,9 @@ const Narration = (props) => {
             {self_revive(templetakenchip,player,revivalused,props.time)} {/* 자가부활모드 */}
             <div className='controler_narration'>
                 <p style = {{margin : "0px 0px 0px 0px", textAlign : "center"}}>내레이션</p>
-                <Button variant="secondary" size = 'narration_reset' onClick={narration_reset} style = {{margin : "0px 0px 0px 0px"}}>3.내레이션 초기화</Button>
-                <Button variant="primary" size = 'player_check' onClick={iotglove_cyberpunk} style = {{margin : "0px 0px 0px 0px"}}>4.플레이어 확인</Button>
-                <Button variant="warning" size = 'player_check' onClick={() => forced_self_revive(props.time)} style = {{margin : "0px 0px 0px 0px"}}>강제 자가부활</Button>
+                <Button variant="secondary" size = 'narration_reset' onClick={narration_reset} style = {{margin : "0px 0px 0px 0px"}}>3. 내레이션 초기화</Button>
+                <Button variant="primary" size = 'player_check' onClick={iotglove_cyberpunk} style = {{margin : "0px 0px 0px 0px"}}>4. 플레이어 확인</Button>
+                <Button variant="warning" size = 'self_revive_button' onClick={() => forced_self_revive(props.time)} style = {{margin : "30px 0px 0px 0px"}}>강제 자가부활</Button>
             </div>
             <div className='controler_game_progerss'>
                 <p className='progress_font_name' style={{margin : '0px 0px 0px 0px'}}>게임 진행도 </p>

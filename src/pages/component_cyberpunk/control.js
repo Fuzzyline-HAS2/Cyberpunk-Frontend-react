@@ -187,19 +187,19 @@ const Control = (props) => {
             <style type="text/css">
                 {`
                     .btn-game_check {
-                        padding: 6px 37px;
+                        padding: 6px 68px;
                         font-size: 14px;
                     }
                     .btn-game_setting {
-                        padding: 6px 7px;
+                        padding: 6px 36px;
                         font-size: 14px;
                     }
                     .btn-game_ready {
-                        padding: 6px 32px;
+                        padding: 6px 60px;
                         font-size: 14px;
                     }
                     .btn-game_start {
-                        padding: 11px 25px;
+                        padding: 11px 56px;
                         font-size: 20px;
                         margin: 0px 0px 0px 0px
                     }
@@ -245,8 +245,8 @@ const Control = (props) => {
             </div>
             <div className='controler_game_start'>
                 <Button variant="info" size = 'game_check' onClick={()=>{button_all_device('check')}}>전체 장치 확인</Button>
-                <Button variant="light" size = 'game_setting' onClick={()=>{button_all_device('S')}}>1.전체 장치 리셋 & 세팅</Button>
-                <Button variant="danger" size = 'game_ready' onClick={()=>{button_all_device('R')}}>2.전체 장치 준비</Button>
+                <Button variant="light" size = 'game_setting' onClick={()=>{button_all_device('S')}}>1. 전체 장치 리셋 & 세팅</Button>
+                <Button variant="danger" size = 'game_ready' onClick={()=>{button_all_device('R')}}>2. 전체 장치 준비</Button>
                 <Button variant="success" size = 'game_start' onClick={game_startShow}>GAME START</Button>
                 <Modal show={game_start_show} onHide={game_startClose} animation={false}>
                     <Modal.Header closeButton>
