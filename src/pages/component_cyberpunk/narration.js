@@ -192,25 +192,26 @@ const Narration = (props) => {
             })
             // console.log(repaired)
             if(repaired !== generatorrepaired){
-
                 switch (repaired){
                     case 1 :
                         console.log('1개 수리')
                         narration(3,3) //0003 VO38 남은 전원공급장치는 2개 입니다
                         left_generator(-1);
+                        setGeneratorRepaired(repaired);
                         break;
                     case 2 :
                         console.log('2개 수리')
                         narration(3,2) //0002 VO37 남은 전원공급장치는 1개 입니다
                         left_generator(-1);
+                        setGeneratorRepaired(repaired);
                         break;
                     case 3 :
                         console.log('3개 수리')
                         narration(3,1) //0001 VO22 모든 전원공급장치의 수리가 완료되었습니다.
                         left_generator(-1);
+                        setGeneratorRepaired(repaired);
                         break;
                 }
-                setGeneratorRepaired(repaired);
                 if(repaired >= 3){
                     narration(1,30) //0030 VO23 탈출장치가 활성화 됩니다.
                     device_activate('escapemachine','');
