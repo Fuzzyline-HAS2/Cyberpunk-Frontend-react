@@ -64,6 +64,7 @@ const Narration = (props) => {
                         device_activate('tagmachine','');
                         device_activate('duct','');
                         device_activate('generator','');
+                        device_activate('temple','');
                         device_activate('revivalmachine',revival_order[0][1]);
                         device_activate('revivalmachine',revival_order[1][1]);
                         device_activate('revivalmachine',revival_order[2][1]);
