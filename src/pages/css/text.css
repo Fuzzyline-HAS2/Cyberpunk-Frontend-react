@@ -1,45 +1,45 @@
-.device_name{
-    font-size: 15px;
-    font-family:"Pretendard-SemiBold";
+.device_name {
+	font-size: 15px;
+	font-family: "Pretendard-SemiBold";
 }
-.timer_number_font{
-    font-size: 75px;
-    margin : 0px 0px 0px 20px;
-    font-family: "Pretendard-SemiBold";
+.timer_number_font {
+	font-size: 75px;
+	margin: 0px 0px 0px 20px;
+	font-family: "Pretendard-SemiBold";
 }
-.revival_font_name{
-    font-size: 12px;
-    margin : 0px 0px 0px 0px;
-    font-family: "Pretendard-ExtraBold";
-    text-align: center;
-    font-weight: bold;
+.revival_font_name {
+	font-size: 12px;
+	margin: 0px 0px 0px 0px;
+	font-family: "Pretendard-ExtraBold";
+	text-align: center;
+	font-weight: bold;
 }
-.revival_font{
-    font-size: 11px;
-    margin : 0px 0px 0px 0px;
-    font-family: "Pretendard-SemiBold";
-    text-align: center;
+.revival_font {
+	font-size: 11px;
+	margin: 0px 0px 0px 0px;
+	font-family: "Pretendard-SemiBold";
+	text-align: center;
 }
-.progress_font_name{
-    font-size: 15px;
-    margin : 0px 0px 5px 0px;
-    font-family: "Pretendard-ExtraBold";
-    text-align: center;
-    font-weight: bold;
+.progress_font_name {
+	font-size: 15px;
+	margin: 0px 0px 5px 0px;
+	font-family: "Pretendard-ExtraBold";
+	text-align: center;
+	font-weight: bold;
 }
-.progress_font{
-    font-size: 13px;
-    margin : 0px 0px 0px 0px;
-    font-family: "Pretendard-ExtraBold";
-    text-align: center;
-    font-weight: normal;
+.progress_font {
+	font-size: 13px;
+	margin: 0px 0px 0px 0px;
+	font-family: "Pretendard-ExtraBold";
+	text-align: center;
+	font-weight: normal;
 }
-.theme_glove_font{
-    font-size: 20px;
-    font-family: "Pretendard-SemiBold";
-    text-align: center;
+.theme_glove_font {
+	font-size: 20px;
+	font-family: "Pretendard-SemiBold";
+	text-align: center;
 }
-.checkbox_glove_font{
-    font-size: 18px;
-    font-weight: normal;
+.checkbox_glove_font {
+	font-size: 18px;
+	font-weight: normal;
 }

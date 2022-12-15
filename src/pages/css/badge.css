@@ -1,12 +1,12 @@
 .bg-theme_cyberpunk {
-    background-color: rgba(211, 158, 255, 0.61);
-    color: dark;
-    }
-.bg-theme_exerciseroom{
-    background-color: rgba(204, 204, 204, 0.61);
-    color: dark;
-    }
-.bg-theme_waiting{
-    background-color: rgba(255, 255, 255, 0.61);
-    color: dark;
-    }
+	background-color: rgba(211, 158, 255, 0.61);
+	color: dark;
+}
+.bg-theme_exerciseroom {
+	background-color: rgba(204, 204, 204, 0.61);
+	color: dark;
+}
+.bg-theme_waiting {
+	background-color: rgba(255, 255, 255, 0.61);
+	color: dark;
+}
