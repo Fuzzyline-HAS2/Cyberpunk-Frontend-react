@@ -93,6 +93,9 @@ const DeviceInfo = (props) => {
 				case "player_lose":
 					device_color = "takenchip_max";
 					break;
+				case "blink":
+					device_color = "takenchip_max";
+					break;
 				case "emergency":
 					device_color = "emergency";
 					online_color = "emergency";

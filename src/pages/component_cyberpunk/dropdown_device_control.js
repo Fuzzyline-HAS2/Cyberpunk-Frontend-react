@@ -161,6 +161,7 @@ const MYDropdownDeviceControl = (props) => {
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
 			{ value: "device_state_check", name: "장치 확인(check)" },
+			{ value: "device_state_blink", name: "술래 결정-활성화x(blink)" },
 			{ value: "device_state_takenchip+1", name: "생명칩+1" },
 			{ value: "device_state_takenchip-1", name: "생명칩-1" },
 			{ value: "device_state_takenchip_max", name: "술래승리(takenchip_max)" },
