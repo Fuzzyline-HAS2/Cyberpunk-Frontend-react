@@ -121,6 +121,7 @@ const Narration = (props) => {
 					case 2:
 						narration(1, 16); //0016 VO14 탈출제한시간이 끝났습니다, 술래가 승리하였습니다
 						game_over("player_lose");
+						device_ready("tagmachine", "");
 						break;
 					case 1:
 						narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
@@ -248,6 +249,7 @@ const Narration = (props) => {
 				if (escape > 0) {
 					narration(1, 32); //0032 VO25 탈출에 성공하였습니다. 생존자가 승리하였습니다.
 					game_over("player_win");
+					device_ready("tagmachine", "");
 					setTimeout(function () {
 						narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
 					}, 1000);
@@ -307,6 +309,7 @@ const Narration = (props) => {
 						case 0: //술래승리
 							narration(1, 15); //0015 VO13 제단이 활성화 되었습니다. 술래가 승리하였습니다.
 							game_over("player_lose");
+							device_ready("tagmachine", "");
 							props.timer_control("playtime", "stop");
 							setTimeout(function () {
 								narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
@@ -353,6 +356,19 @@ const Narration = (props) => {
 				console.log(error);
 			});
 	};
+	const device_ready = async (device_type, device_name) => {
+		await axios
+			.post("/api/update/device", {
+				theme: "cyberpunk",
+				device_type: device_type,
+				device_name: device_name,
+				device_state: "ready",
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+
 	/**
 	 * @brief 게임이 종료되었을 때 player_win & player_lose로 device_state를 변경해주는 함수
 	 * @param device_state 게임이 끝났을 때 device_state
