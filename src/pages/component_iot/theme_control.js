@@ -264,6 +264,14 @@ const ThemeControl = () => {
 						술래 활성화
 					</Button>
 					<br></br>
+					<p
+						style={{
+							margin: "0px 5px 0px 0px",
+							color: "rgba(255, 0, 0, 1)",
+						}}
+					>
+						체크박스 확인필수
+					</p>
 					<span style={{ margin: "0px 5px 0px 0px" }}>참여결정</span>
 					<span style={{ margin: "0px 0px 0px 5px" }}>술래결정</span>
 					<form>
@@ -447,6 +455,7 @@ const ThemeControl = () => {
 				group: glove,
 				command: "state_change",
 				state: state,
+				tagger: taggercheck[0],
 			})
 			.catch(function (error) {
 				console.log(error);
