@@ -264,6 +264,9 @@ const ThemeControl = () => {
 						술래 활성화
 					</Button>
 					<br></br>
+					<Button variant='info' size='sm' onClick={() => gloveCheck(group)}>
+						장치확인
+					</Button>
 					<p
 						style={{
 							margin: "0px 5px 0px 0px",
@@ -456,6 +459,16 @@ const ThemeControl = () => {
 				command: "state_change",
 				state: state,
 				tagger: taggercheck[0],
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+	const gloveCheck = async (glove) => {
+		await axios
+			.post("/api/check", {
+				device: "iotglove",
+				group: glove,
 			})
 			.catch(function (error) {
 				console.log(error);
