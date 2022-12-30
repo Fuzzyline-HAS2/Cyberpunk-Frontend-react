@@ -118,13 +118,15 @@ const Narration = (props) => {
 						device_activate("revivalmachine", revival_order[9][1]);
 						console.log(revival_order[9][1]);
 						break;
-					case 2:
+					case 3:
 						narration(1, 16); //0016 VO14 탈출제한시간이 끝났습니다, 술래가 승리하였습니다
-						game_over("player_lose");
-						device_ready("tagmachine", "");
+						break;
+					case 2:
+						narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
 						break;
 					case 1:
-						narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
+						game_over("player_lose");
+						device_ready("tagmachine", "");
 						break;
 					case selfrevivalstart:
 						self_revival(
@@ -264,14 +266,14 @@ const Narration = (props) => {
 		let takenchip = 0;
 		if (temple !== undefined) {
 			if (temple.length !== 0) {
-				console.log("temple[0][device_state] : ", temple[0]["device_state"]);
-				console.log("taggerActivate : ", taggerActivate);
-				console.log("temple[0]['taken_chip']", temple[0]["taken_chip"]);
+				// console.log("temple[0][device_state] : ", temple[0]["device_state"]);
+				// console.log("taggerActivate : ", taggerActivate);
+				// console.log("temple[0]['taken_chip']", temple[0]["taken_chip"]);
 				if (
 					temple[0]["device_state"] === "activate" &&
 					temple[0]["device_state"] !== taggerActivate
 				) {
-					console.log("taggerActivate:", taggerActivate);
+					// console.log("taggerActivate:", taggerActivate);
 					setTaggerActivate("activate");
 					narration(1, 59); //0059 VO51 술래의 글러브가 활성화 되었습니다. 술래가 활동을 시작합니다.
 				}
@@ -519,8 +521,8 @@ const Narration = (props) => {
 	};
 	return (
 		<>
-			{console.log("selfrevivalstart :", selfrevivalstart)}
-			{console.log("selfrevivalend :", selfrevivalend)}
+			{/* {console.log("selfrevivalstart :", selfrevivalstart)}
+			{console.log("selfrevivalend :", selfrevivalend)} */}
 			<style type='text/css'>
 				{`
                     .btn-narration_reset {
@@ -552,7 +554,7 @@ const Narration = (props) => {
 			{/* 자가부활모드 */}
 			<div className='controler_narration'>
 				<p style={{ margin: "0px 0px 0px 0px", textAlign: "center" }}>
-					내레이션
+					내레이션 (게임도중 누르면 변수가 초기화되어 현재 문제있음)
 				</p>
 				<Button
 					variant='secondary'
@@ -592,7 +594,7 @@ const Narration = (props) => {
 				</p>
 				<p className='progress_font'>사용된 부활장치 : {revivalused}/10</p>
 				<p className='progress_font'>제단 생명칩 개수 : {templetakenchip}/10</p>
-				<p className='progress_font'>남은 생명 : {10 - templetakenchip}/10</p>
+				{/* <p className='progress_font'>남은 생명 : {10 - templetakenchip}/10</p> */}
 				<p className='progress_font'>
 					자가부활 시간:{" "}
 					{props.time - selfrevivalend > 90
