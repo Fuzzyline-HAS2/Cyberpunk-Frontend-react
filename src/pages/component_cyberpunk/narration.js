@@ -464,6 +464,17 @@ const Narration = (props) => {
 		setSelfRevivalStart(-10);
 		setSelfRevivalEnd(-10);
 	};
+	const narration_problem_reset = async () => {
+		await axios
+			.post("/api/reset", {
+				theme: "cyberpunk",
+				device: "mp3",
+				command: "mp3_reset",
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
 	/**
 	 * @brief 게임하고있는 플레이어의 수 계산하는 함수
 	 */
@@ -554,7 +565,7 @@ const Narration = (props) => {
 			{/* 자가부활모드 */}
 			<div className='controler_narration'>
 				<p style={{ margin: "0px 0px 0px 0px", textAlign: "center" }}>
-					내레이션 (게임도중 누르면 변수가 초기화되어 현재 문제있음)
+					내레이션 (현재 문제있음)
 				</p>
 				<Button
 					variant='secondary'
@@ -571,6 +582,14 @@ const Narration = (props) => {
 					style={{ margin: "0px 0px 0px 0px" }}
 				>
 					4. 플레이어 확인
+				</Button>
+				<Button
+					variant='secondary'
+					size='narration_reset'
+					onClick={narration_problem_reset}
+					style={{ margin: "0px 0px 0px 0px" }}
+				>
+					mp3문제있을때
 				</Button>
 				<Button
 					variant='warning'
