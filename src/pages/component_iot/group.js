@@ -44,10 +44,10 @@ const Group = (props) => {
 			//생명칩 개수에 따라 역할 변경 player <-> ghost
 			if (group_info.role === "player" && group_info.life_chip < 1) {
 				console.log("ghost로 변경");
-				role_change(group_info.device_name, "ghost");
+				// role_change(group_info.device_name, "ghost");
 			} else if (group_info.role === "ghost" && group_info.life_chip > 0) {
 				console.log("player로 변경");
-				role_change(group_info.device_name, "player");
+				// role_change(group_info.device_name, "player");
 			}
 			//경험치 상승에 따른 LV,SP변경
 			if (group_info.exp > group_info.max_exp) {
