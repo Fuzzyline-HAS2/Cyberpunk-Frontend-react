@@ -118,12 +118,15 @@ const Narration = (props) => {
 						device_activate("revivalmachine", revival_order[9][1]);
 						console.log(revival_order[9][1]);
 						break;
-					case 2:
+					case 3:
 						narration(1, 16); //0016 VO14 탈출제한시간이 끝났습니다, 술래가 승리하였습니다
-						game_over("player_lose");
+						break;
+					case 2:
+						narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
 						break;
 					case 1:
-						narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
+						game_over("player_lose");
+						device_ready("tagmachine", "");
 						break;
 					case selfrevivalstart:
 						self_revival(
@@ -248,6 +251,7 @@ const Narration = (props) => {
 				if (escape > 0) {
 					narration(1, 32); //0032 VO25 탈출에 성공하였습니다. 생존자가 승리하였습니다.
 					game_over("player_win");
+					device_ready("tagmachine", "");
 					setTimeout(function () {
 						narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
 					}, 1000);
@@ -262,14 +266,14 @@ const Narration = (props) => {
 		let takenchip = 0;
 		if (temple !== undefined) {
 			if (temple.length !== 0) {
-				console.log("temple[0][device_state] : ", temple[0]["device_state"]);
-				console.log("taggerActivate : ", taggerActivate);
-				console.log("temple[0]['taken_chip']", temple[0]["taken_chip"]);
+				// console.log("temple[0][device_state] : ", temple[0]["device_state"]);
+				// console.log("taggerActivate : ", taggerActivate);
+				// console.log("temple[0]['taken_chip']", temple[0]["taken_chip"]);
 				if (
 					temple[0]["device_state"] === "activate" &&
 					temple[0]["device_state"] !== taggerActivate
 				) {
-					console.log("taggerActivate:", taggerActivate);
+					// console.log("taggerActivate:", taggerActivate);
 					setTaggerActivate("activate");
 					narration(1, 59); //0059 VO51 술래의 글러브가 활성화 되었습니다. 술래가 활동을 시작합니다.
 				}
@@ -307,6 +311,7 @@ const Narration = (props) => {
 						case 0: //술래승리
 							narration(1, 15); //0015 VO13 제단이 활성화 되었습니다. 술래가 승리하였습니다.
 							game_over("player_lose");
+							device_ready("tagmachine", "");
 							props.timer_control("playtime", "stop");
 							setTimeout(function () {
 								narration(1, 61); //0061 VO53 게임이 종료되었습니다. 모든플레이어는 제단앞으로 모여주세요
@@ -353,6 +358,19 @@ const Narration = (props) => {
 				console.log(error);
 			});
 	};
+	const device_ready = async (device_type, device_name) => {
+		await axios
+			.post("/api/update/device", {
+				theme: "cyberpunk",
+				device_type: device_type,
+				device_name: device_name,
+				device_state: "ready",
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+
 	/**
 	 * @brief 게임이 종료되었을 때 player_win & player_lose로 device_state를 변경해주는 함수
 	 * @param device_state 게임이 끝났을 때 device_state
@@ -446,6 +464,17 @@ const Narration = (props) => {
 		setSelfRevivalStart(-10);
 		setSelfRevivalEnd(-10);
 	};
+	const narration_problem_reset = async () => {
+		await axios
+			.post("/api/reset", {
+				theme: "cyberpunk",
+				device: "mp3",
+				command: "mp3_reset",
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
 	/**
 	 * @brief 게임하고있는 플레이어의 수 계산하는 함수
 	 */
@@ -503,8 +532,8 @@ const Narration = (props) => {
 	};
 	return (
 		<>
-			{console.log("selfrevivalstart :", selfrevivalstart)}
-			{console.log("selfrevivalend :", selfrevivalend)}
+			{/* {console.log("selfrevivalstart :", selfrevivalstart)}
+			{console.log("selfrevivalend :", selfrevivalend)} */}
 			<style type='text/css'>
 				{`
                     .btn-narration_reset {
@@ -536,7 +565,7 @@ const Narration = (props) => {
 			{/* 자가부활모드 */}
 			<div className='controler_narration'>
 				<p style={{ margin: "0px 0px 0px 0px", textAlign: "center" }}>
-					내레이션
+					내레이션 (현재 문제있음)
 				</p>
 				<Button
 					variant='secondary'
@@ -553,6 +582,14 @@ const Narration = (props) => {
 					style={{ margin: "0px 0px 0px 0px" }}
 				>
 					4. 플레이어 확인
+				</Button>
+				<Button
+					variant='secondary'
+					size='narration_reset'
+					onClick={narration_problem_reset}
+					style={{ margin: "0px 0px 0px 0px" }}
+				>
+					mp3문제있을때
 				</Button>
 				<Button
 					variant='warning'
@@ -576,7 +613,7 @@ const Narration = (props) => {
 				</p>
 				<p className='progress_font'>사용된 부활장치 : {revivalused}/10</p>
 				<p className='progress_font'>제단 생명칩 개수 : {templetakenchip}/10</p>
-				<p className='progress_font'>남은 생명 : {10 - templetakenchip}/10</p>
+				{/* <p className='progress_font'>남은 생명 : {10 - templetakenchip}/10</p> */}
 				<p className='progress_font'>
 					자가부활 시간:{" "}
 					{props.time - selfrevivalend > 90

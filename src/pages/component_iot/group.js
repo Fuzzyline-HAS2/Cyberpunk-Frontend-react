@@ -169,7 +169,7 @@ const Group = (props) => {
 									Lv : {group_info.lv}
 								</Badge>
 								<Badge bg={background_in} text='dark'>
-									위치
+									{group_info.location}
 								</Badge>
 							</div>
 							<div className='text-center'>
