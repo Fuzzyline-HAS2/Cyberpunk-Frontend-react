@@ -81,6 +81,7 @@ const MYDropdownDeviceControl = (props) => {
 	const select_command = {
 		itembox: [
 			{ value: "명령어", name: "명령어" },
+			{ value: "device_state_watchdog", name: "장치리셋(watchdog)" },
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
@@ -92,6 +93,7 @@ const MYDropdownDeviceControl = (props) => {
 		],
 		revivalmachine: [
 			{ value: "명령어", name: "명령어" },
+			{ value: "device_state_watchdog", name: "장치리셋(watchdog)" },
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
@@ -102,6 +104,7 @@ const MYDropdownDeviceControl = (props) => {
 		],
 		tagmachine: [
 			{ value: "명령어", name: "명령어" },
+			{ value: "device_state_watchdog", name: "장치리셋(watchdog)" },
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
@@ -113,6 +116,7 @@ const MYDropdownDeviceControl = (props) => {
 		],
 		duct: [
 			{ value: "명령어", name: "명령어" },
+			{ value: "device_state_watchdog", name: "장치리셋(watchdog)" },
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
@@ -124,6 +128,7 @@ const MYDropdownDeviceControl = (props) => {
 		],
 		generator: [
 			{ value: "명령어", name: "명령어" },
+			{ value: "device_state_watchdog", name: "장치리셋(watchdog)" },
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
@@ -148,6 +153,7 @@ const MYDropdownDeviceControl = (props) => {
 		],
 		escapemachine: [
 			{ value: "명령어", name: "명령어" },
+			{ value: "device_state_watchdog", name: "장치리셋(watchdog)" },
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
@@ -157,6 +163,7 @@ const MYDropdownDeviceControl = (props) => {
 		],
 		temple: [
 			{ value: "명령어", name: "명령어" },
+			{ value: "device_state_watchdog", name: "장치리셋(watchdog)" },
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
