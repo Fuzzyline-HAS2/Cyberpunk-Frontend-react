@@ -97,6 +97,7 @@ const MYDropdownDeviceControl = (props) => {
 			{ value: "game_state_S", name: "세팅(S)" },
 			{ value: "game_state_R", name: "준비(R)" },
 			{ value: "game_state_A", name: "활성화(A)" },
+			{ value: "device_state_ready_activate", name: "ready_activate" },
 			{ value: "device_state_check", name: "장치 확인(check)" },
 			{ value: "device_state_self_revive", name: "자가부활(self_revive)" },
 			{ value: "device_state_used", name: "사용완료(used)" },

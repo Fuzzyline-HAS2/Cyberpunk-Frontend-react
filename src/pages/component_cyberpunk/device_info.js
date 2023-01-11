@@ -60,6 +60,9 @@ const DeviceInfo = (props) => {
 				case "ready":
 					device_color = "danger";
 					break;
+				case "ready_activate":
+					device_color = "danger";
+					break;
 				case "activate":
 					device_color = "warning";
 					break;

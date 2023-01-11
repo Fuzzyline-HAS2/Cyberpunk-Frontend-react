@@ -40,15 +40,20 @@ const Group = (props) => {
 		let background_in;
 		let background_out;
 		let color_theme;
+
 		if (group !== undefined && group_info !== undefined) {
-			//생명칩 개수에 따라 역할 변경 player <-> ghost
-			if (group_info.role === "player" && group_info.life_chip < 1) {
-				console.log("ghost로 변경");
-				// role_change(group_info.device_name, "ghost");
-			} else if (group_info.role === "ghost" && group_info.life_chip > 0) {
-				console.log("player로 변경");
-				// role_change(group_info.device_name, "player");
-			}
+			//***********************************************
+			//생명칩 개수에 따라 역할 변경 player <-> ghost (react에서)
+			//주석처리하게되면 iotglove 자체에서 send로 역할을 바꿔준다.
+			// if (group_info.role === "player" && group_info.life_chip < 1) {
+			// 	console.log("ghost로 변경");
+			// 	// role_change(group_info.device_name, "ghost");
+			// } else if (group_info.role === "ghost" && group_info.life_chip > 0) {
+			// 	console.log("player로 변경");
+			// 	// role_change(group_info.device_name, "player");
+			// }
+			//***********************************************
+
 			//경험치 상승에 따른 LV,SP변경
 			if (group_info.exp > group_info.max_exp) {
 				exp_change(group_info.device_name, group_info.exp - group_info.max_exp);

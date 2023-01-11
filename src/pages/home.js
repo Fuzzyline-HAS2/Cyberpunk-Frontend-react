@@ -11,7 +11,7 @@ const Home = () => {
 			</a>
 			<br></br>
 			<Link to='/exerciseroom' target='_blank'>
-				훈련소
+				훈련소(추후 업데이트)
 			</Link>
 			<br></br>
 			<Link to='/iotglove' target='_blank'>

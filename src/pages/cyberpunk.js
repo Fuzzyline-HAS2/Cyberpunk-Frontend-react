@@ -1,3 +1,4 @@
+//사이버펑크 테마를 위한 컴포넌트입니다.
 import React, { Component } from "react";
 import axios from "axios";
 import Badge from "react-bootstrap/esm/Badge";
