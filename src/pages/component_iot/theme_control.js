@@ -531,6 +531,17 @@ const ThemeControl = () => {
 				console.log(error);
 			});
 	};
+	const watchdog = async (group) => {
+		await axios
+			.post("/api/update/iotglove", {
+				theme: "cyberpunk",
+				group: group,
+				command: "watchdog",
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
 	const theme_confirm = async (theme, group) => {
 		let player = [];
 		let tagger = [];
@@ -597,6 +608,10 @@ const ThemeControl = () => {
 								</Button>
 							</Modal.Footer>
 						</Modal>
+						<Button variant='primary' size='sm' onClick={() => watchdog(group)}>
+							재시작(와치독)
+						</Button>
+						<br></br>
 					</div>
 				);
 			case "G2":
@@ -620,6 +635,10 @@ const ThemeControl = () => {
 								</Button>
 							</Modal.Footer>
 						</Modal>
+						<Button variant='primary' size='sm' onClick={() => watchdog(group)}>
+							재시작(와치독)
+						</Button>
+						<br></br>
 					</div>
 				);
 			case "G3":
@@ -643,6 +662,10 @@ const ThemeControl = () => {
 								</Button>
 							</Modal.Footer>
 						</Modal>
+						<Button variant='primary' size='sm' onClick={() => watchdog(group)}>
+							재시작(와치독)
+						</Button>
+						<br></br>
 					</div>
 				);
 			case "G4":
@@ -666,6 +689,10 @@ const ThemeControl = () => {
 								</Button>
 							</Modal.Footer>
 						</Modal>
+						<Button variant='primary' size='sm' onClick={() => watchdog(group)}>
+							재시작(와치독)
+						</Button>
+						<br></br>
 					</div>
 				);
 		}
