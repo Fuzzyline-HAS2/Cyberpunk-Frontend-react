@@ -13,8 +13,7 @@ const Narration = (props) => {
 	const [taggerActivate, setTaggerActivate] = useState("");
 	const [gamegroup, setGameGroup] = useState("non");
 	const [player, setPlayer] = useState(0);
-	const [selfrevivalstart, setSelfRevivalStart] = useState(-10);
-	const [selfrevivalend, setSelfRevivalEnd] = useState(-10);
+	const [selfrevivalstart, setSelfRevivalStart] = useState(0);
 
 	const [selfreviveshow, setSelfReviveShow] = useState(false);
 	const handleClose = () => setSelfReviveShow(false);
@@ -127,47 +126,6 @@ const Narration = (props) => {
 					case 1:
 						game_over("player_lose");
 						device_ready("tagmachine", "");
-						break;
-					case selfrevivalstart:
-						self_revival(
-							"cyberpunk",
-							"revivalmachine",
-							"all",
-							"self_revive_start"
-						);
-						break;
-					case selfrevivalstart - 2:
-						narration(1, 31); //0031 VO24 생명장치 활성화
-						break;
-					case selfrevivalend:
-						let revival = [];
-						let n = 0;
-						if (time >= 1740) {
-							n = 3;
-						} else if (time >= 1560) {
-							n = 4;
-						} else if (time >= 1380) {
-							n = 5;
-						} else if (time >= 1200) {
-							n = 6;
-						} else if (time >= 1020) {
-							n = 7;
-						} else if (time >= 840) {
-							n = 8;
-						} else if (time >= 660) {
-							n = 9;
-						} else {
-							n = 10;
-						}
-						for (let i = 0; i < n; i++) {
-							revival.push(revival_order[i][1]);
-						}
-						self_revival(
-							"cyberpunk",
-							"revivalmachine",
-							revival,
-							"self_revive_end"
-						);
 						break;
 				}
 			}
@@ -402,21 +360,6 @@ const Narration = (props) => {
 			});
 	};
 	/**
-	 * @brief 부활장치 활성화 순서에 따라 활성화 시키는 함수
-	 */
-	const self_revival = async (theme, device_type, device_name, command) => {
-		await axios
-			.post("/api/update/selfrevive", {
-				theme: theme,
-				device_type: device_type,
-				device_name: device_name,
-				command: command,
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-	};
-	/**
 	 * @brief 부활장치 활성화 순서를 출력해줌
 	 */
 	const revival_activate_num = (revival) => {
@@ -461,8 +404,8 @@ const Narration = (props) => {
 		setTempleTakenChip(0);
 		setEscapeEscape(0);
 		setTaggerActivate("");
-		setSelfRevivalStart(-10);
-		setSelfRevivalEnd(-10);
+		setSelfRevivalStart(0);
+		// setSelfRevivalEnd(-10);
 	};
 	const narration_problem_reset = async () => {
 		await axios
@@ -502,33 +445,44 @@ const Narration = (props) => {
 		}
 	};
 	/**
-	 * @brief 자가부활모드 시작, 종료시간 지정하는 함수
+	 * @brief 자가부활모드
 	 */
 	const self_revive = (templetakenchip, player, revivalused, time) => {
 		// console.log(selfrevivalstart);
 		// console.log(player-1+revivalused)
 		if (player - 1 + revivalused === templetakenchip) {
 			//술래가 제단에 모은 칩 === 생존자수 + 부활장치 이용개수
-			if (selfrevivalstart === -10) {
+			if (selfrevivalstart <= 0) {
 				narration(1, 48); //0048 VO40 자가부활
 				handleShow();
-				setSelfRevivalStart(time - 40); //자가부활 시작시간: 생존자가 모두 죽은 뒤 30초 후이지만
-				//한명의 생존자가 사망하였습니다, 남은 생명은 n개 입니다. mp3파일이 재생되느라 자가부활 음성이 밀리기때문에 10초정도 더 뒤로
-				setSelfRevivalEnd(time - 100);
+				setSelfRevivalStart(time);
 			}
 		}
 	};
 	/**
-	 * @brief 강제 자가부활모드 시작, 종료시간 지정하는 함수
+	 * @brief 강제 자가부활모드
 	 */
 	const forced_self_revive = (time) => {
-		if (selfrevivalstart === -10) {
+		if (selfrevivalstart <= 0) {
 			narration(1, 48); //0048 VO40 자가부활
 			handleShow();
-			setSelfRevivalStart(time - 30); //자가부활 시작시간: 생존자가 모두 죽은 뒤 30초 후
-			//한명의 생존자가 사망하였습니다, 남은 생명은 n개 입니다.
-			setSelfRevivalEnd(time - 90);
+			setSelfRevivalStart(time);
+			self_revive_iotglove();
 		}
+	};
+	/**
+	 * @brief 자가부활 -> iotglove에 생명칩 하나씩 넣어주기
+	 */
+	const self_revive_iotglove = async () => {
+		await axios
+			.post("/api/update/selfrevive", {
+				theme: "cyberpunk",
+				device: "iotglove",
+				group: gamegroup,
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
 	};
 	return (
 		<>
@@ -613,14 +567,11 @@ const Narration = (props) => {
 				</p>
 				<p className='progress_font'>사용된 부활장치 : {revivalused}/10</p>
 				<p className='progress_font'>제단 생명칩 개수 : {templetakenchip}/10</p>
-				{/* <p className='progress_font'>남은 생명 : {10 - templetakenchip}/10</p> */}
 				<p className='progress_font'>
 					자가부활 시간:{" "}
-					{props.time - selfrevivalend > 90
+					{selfrevivalstart <= 0
 						? "X"
-						: props.time - selfrevivalend < 0
-						? "사용완료"
-						: props.time - selfrevivalend}
+						: parseInt(selfrevivalstart / 60) + ":" + (selfrevivalstart % 60)}
 				</p>
 			</div>
 			<div className='controler_revival_order'>
