@@ -456,6 +456,7 @@ const Narration = (props) => {
 				narration(1, 48); //0048 VO40 자가부활
 				handleShow();
 				setSelfRevivalStart(time);
+				self_revive_iotglove();
 			}
 		}
 	};
@@ -475,7 +476,7 @@ const Narration = (props) => {
 	 */
 	const self_revive_iotglove = async () => {
 		await axios
-			.post("/api/update/selfrevive", {
+			.post("/api/selfrevive/iotglove", {
 				theme: "cyberpunk",
 				device: "iotglove",
 				group: gamegroup,
@@ -519,7 +520,7 @@ const Narration = (props) => {
 			{/* 자가부활모드 */}
 			<div className='controler_narration'>
 				<p style={{ margin: "0px 0px 0px 0px", textAlign: "center" }}>
-					내레이션 (현재 문제있음)
+					내레이션
 				</p>
 				<Button
 					variant='secondary'
