@@ -99,6 +99,27 @@ const DeviceInfo = (props) => {
 				case "blink":
 					device_color = "takenchip_max";
 					break;
+				case "stage1":
+					device_color = "stage1";
+					break;
+				case "stage2":
+					device_color = "stage2";
+					break;
+				case "stage3":
+					device_color = "stage3";
+					break;
+				case "rescue":
+					device_color = "self_revive";
+					break;
+				case "cool_res":
+					device_color = "lock";
+					break;
+				case "cool_die":
+					device_color = "lock";
+					break;
+				case "debuff":
+					device_color = "stage2";
+					break;
 				case "emergency":
 					device_color = "emergency";
 					online_color = "emergency";
@@ -402,6 +423,18 @@ const DeviceInfo = (props) => {
                     background-color: rgba(183, 75, 255, 0.7);
                     color: black;
                 }
+				.bg-stage1 {
+					background-color: rgba(201, 179, 255, 0.7);
+					color: black;
+						}
+				.bg-stage2 {
+							background-color: rgba(137, 87, 255, 0.7);
+							color: black;
+						}
+				.bg-stage3 {
+							background-color: rgba(73, 0, 255, 0.7);
+							color: black;
+						}
                 .bg-emergency {
                     background-color: rgb(251, 255, 0);
                     color: black;

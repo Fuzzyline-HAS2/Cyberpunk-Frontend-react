@@ -11,6 +11,11 @@ let time_control = null;
  */
 const Control = (props) => {
 	const [timer, setTimer] = useState(2101);
+	const language = [
+		{ value: "KO", name: "한국어" },
+		{ value: "EN", name: "영어" },
+	];
+	const [selected_language, setSelectedLanguage] = useState("");
 	const [game_start_show, setGameStartShow] = useState(false);
 	const [timer_reset_show, setTimerResetShow] = useState(false);
 	const revival = [
@@ -202,6 +207,24 @@ const Control = (props) => {
 			);
 		}
 	}
+	const handleSelectLanguage = (e) => {
+		setSelectedLanguage(e.target.value);
+		onChangeLanguage(e.target.value);
+	};
+	const onChangeLanguage = async (lang) => {
+		localStorage.setItem("language", JSON.stringify(lang));
+		await axios
+			.post("/api/update/selected_language", {
+				lang: lang,
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+	React.useEffect(() => {
+		const lastSelected = JSON.parse(localStorage.getItem("language") ?? "[]");
+		setSelectedLanguage(lastSelected);
+	}, []);
 
 	return (
 		<>
@@ -399,6 +422,13 @@ const Control = (props) => {
 				<Button variant='success' size='game_start' onClick={game_startShow}>
 					GAME START
 				</Button>
+				<select onChange={handleSelectLanguage} value={selected_language}>
+					{language.map((item) => (
+						<option value={item.value} key={item.value}>
+							{item.name}
+						</option>
+					))}
+				</select>
 				<Modal
 					show={game_start_show}
 					onHide={game_startClose}

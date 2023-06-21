@@ -600,7 +600,7 @@ class Cyberpunk extends Component {
 				</style>
 				<div className='wrapper'>
 					<div className='main'>
-						<h1>Cyberpunk</h1>
+						<h1>BadLand</h1>
 						<button
 							onClick={this.refresh}
 							style={{ position: "absolute", top: "40px", left: "450px" }}
@@ -665,11 +665,11 @@ class Cyberpunk extends Component {
 								</Button>
 								<br />
 							</div>
-							<div className='device_bar'>바</div>
-							<div className='device_house'>하우스</div>
-							<div className='device_gun_shop'>건샵</div>
-							<div className='device_office'>오피스</div>
-							<div className='device_food_court'>푸드코트</div>
+							<div className='device_bar'>RUINS</div>
+							<div className='device_house'>CHECK POINT</div>
+							<div className='device_gun_shop'>SHOOTONG RANGE</div>
+							<div className='device_office'>PRISON</div>
+							<div className='device_food_court'>AUTO MECH</div>
 						</div>
 					</div>
 					<div className='itembox'>

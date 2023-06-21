@@ -89,7 +89,7 @@ class Iotglove extends Component {
 			<>
 				<div className='wrapper'>
 					<div className='header'>
-						<h1>IoT글러브</h1>
+						<h1>Badland_IoT글러브</h1>
 						<button
 							onClick={this.refresh}
 							style={{ position: "absolute", top: "40px", left: "450px" }}

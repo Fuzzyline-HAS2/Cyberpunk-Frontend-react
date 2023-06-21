@@ -62,7 +62,6 @@ const Narration = (props) => {
 						device_activate("itembox", "");
 						device_activate("tagmachine", "");
 						device_activate("duct", "");
-						device_activate("generator", "");
 						device_activate("temple", "");
 						device_activate("revivalmachine", revival_order[0][1]);
 						device_activate("revivalmachine", revival_order[1][1]);
@@ -224,15 +223,13 @@ const Narration = (props) => {
 		let takenchip = 0;
 		if (temple !== undefined) {
 			if (temple.length !== 0) {
-				// console.log("temple[0][device_state] : ", temple[0]["device_state"]);
-				// console.log("taggerActivate : ", taggerActivate);
-				// console.log("temple[0]['taken_chip']", temple[0]["taken_chip"]);
 				if (
 					temple[0]["device_state"] === "activate" &&
 					temple[0]["device_state"] !== taggerActivate
 				) {
-					// console.log("taggerActivate:", taggerActivate);
 					setTaggerActivate("activate");
+					device_activate("generator", "");
+					device_activate("chair", "");
 					narration(1, 59); //0059 VO51 술래의 글러브가 활성화 되었습니다. 술래가 활동을 시작합니다.
 				}
 				if (temple[0]["taken_chip"] !== templetakenchip) {
@@ -240,7 +237,7 @@ const Narration = (props) => {
 					setTempleTakenChip(takenchip);
 					switch (10 - takenchip) {
 						case 9:
-							narration(2, 9); //0009 한명의 생존자가 사망하였습니다, 남은 생명은 9개 입니다.
+							narration(2, 9); //0009 한명의 생존자가 사망하였습니다, 남은 생명은 9개 입니다.					
 							break;
 						case 8:
 							narration(2, 8); //0008 한명의 생존자가 사망하였습니다, 남은 생명은 8개 입니다.
