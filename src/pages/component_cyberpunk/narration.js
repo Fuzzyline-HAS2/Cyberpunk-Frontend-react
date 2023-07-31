@@ -14,10 +14,13 @@ const Narration = (props) => {
 	const [gamegroup, setGameGroup] = useState("non");
 	const [player, setPlayer] = useState(0);
 	const [selfrevivalstart, setSelfRevivalStart] = useState(0);
-
 	const [selfreviveshow, setSelfReviveShow] = useState(false);
 	const handleClose = () => setSelfReviveShow(false);
 	const handleShow = () => setSelfReviveShow(true);
+
+	const [rescueCount, setRescueCount] = useState(0);
+	const [rescueState, setRescueState] = useState(false);
+
 	/**
 	 * @brief time에 따라 내레이션을 결정해주는 함수
 	 */
@@ -232,6 +235,18 @@ const Narration = (props) => {
 					device_activate("chair", "");
 					narration(1, 59); //0059 VO51 술래의 글러브가 활성화 되었습니다. 술래가 활동을 시작합니다.
 				}
+				if(temple[1]["device_state"] === "rescue" && rescueState === false){
+					setRescueState(true);
+					setRescueCount(rescueCount + 1);
+					// console.log(`rescueCount : ${rescueCount + 1}`);
+				}
+				if(temple[1]["device_state"] !== "rescue" && rescueState === true){
+					setRescueState(false);
+				}
+				if(temple[1]["device_state"] === "setting" && rescueCount > 0){
+					setRescueCount(0);
+					setRescueState(false);
+				}
 				if (temple[0]["taken_chip"] !== templetakenchip) {
 					takenchip = temple[0]["taken_chip"];
 					setTempleTakenChip(takenchip);
@@ -444,10 +459,9 @@ const Narration = (props) => {
 	/**
 	 * @brief 자가부활모드
 	 */
-	const self_revive = (templetakenchip, player, revivalused, time) => {
-		// console.log(selfrevivalstart);
-		// console.log(player-1+revivalused)
-		if (player - 1 + revivalused === templetakenchip) {
+	const self_revive = (templetakenchip, player, revivalused, rescueCount, time ) => {
+		// console.log(`자가부활 개수 : ${player-1+revivalused + rescueCount}`);
+		if (player - 1 + revivalused + rescueCount === templetakenchip) {
 			//술래가 제단에 모은 칩 === 생존자수 + 부활장치 이용개수
 			if (selfrevivalstart <= 0) {
 				narration(1, 48); //0048 VO40 자가부활
@@ -513,7 +527,7 @@ const Narration = (props) => {
 			{revivalmachine(props.device_info.revivalmachine_info)}
 			{temple(props.device_info.temple_info)}
 			{escapemachine(props.device_info.escapemachine_info)}
-			{self_revive(templetakenchip, player, revivalused, props.time)}{" "}
+			{self_revive(templetakenchip, player, revivalused, rescueCount, props.time)}{" "}
 			{/* 자가부활모드 */}
 			<div className='controler_narration'>
 				<p style={{ margin: "0px 0px 0px 0px", textAlign: "center" }}>
